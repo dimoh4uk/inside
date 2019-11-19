@@ -1,0 +1,34 @@
+@import "variables";
+@import "helpers/all";
+@import "modules/all";
+
+html {
+  font-size: rem-calc($base-fort-size);
+
+}
+
+body {
+  background: $site-bg;
+  color: $site-color;
+  box-sizing: border-box;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+.site-title {
+  @extend .h1;
+}
+
+.site-subtitle {
+  @extend .h2;
+}
+
+.section-header {
+  @extend .h2;
+  font-weight: 600;
+}

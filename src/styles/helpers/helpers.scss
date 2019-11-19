@@ -1,0 +1,9 @@
+@import "../variables";
+
+@function rem-calc($px) {
+  @return ($px/$base-fort-size)*1rem;
+}
+
+@function em-calc($px) {
+  @return ($px/$base-fort-size)*1em;
+}
