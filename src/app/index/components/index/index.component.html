@@ -1,14 +1,28 @@
-<h1 class="site-title">
-  The site is on track
-</h1>
+<header class="site-header">
+  <video
+    #bgVideo
+    loop
+    class="video-bg">
+    <!--           loop="loop" poster="bg/daisy-stock-poster.jpg">-->
+    <source src="assets/video/preload.mp4" type="video/mp4">
+  </video>
+  <div class="header-content container">
+    <h1 class="site-title" [@pageTitleTrigger]="getTriggerStatus()">
+      The site is on track
+    </h1>
 
-<div class="action wrapper">
-  <button class="action-button">
-    Play showrell
-  </button>
-</div>
+    <div class="action-block">
+      <app-header-button
+        (click)="play()"
+        (keyup)="play($event)"
+        [buttonText]="'Play sowreel'"
+      ></app-header-button>
+      <!--      <button (click)="mute()">mute video</button>-->
+    </div>
+    <app-site-bar></app-site-bar>
+  </div>
+</header>
 
-<!--<site-bar>-->
-<!--  <a href="/" class="logo">inside</a>-->
-<!--  <site-menu></site-menu>-->
-<!--</site-bar>-->
+<section class="site-section">
+  <router-outlet></router-outlet>
+</section>

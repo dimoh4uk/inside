@@ -19,3 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 })
 export class AppModule {
 }
+
+
+/** TODO
+ * sliders https://github.com/glidejs/glide , https://github.com/ganlanyuan/tiny-slider
+ * animation https://habr.com/ru/company/infowatch/blog/353150/
+ */

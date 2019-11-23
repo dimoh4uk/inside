@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddRoutersPath } from './add-routers.path';
+import { AppRoutersPath } from './app-routers.path';
 
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: AddRoutersPath.index,
+    redirectTo: AppRoutersPath.index,
   },
   {
-    path: AddRoutersPath.index,
+    path: AppRoutersPath.index,
     loadChildren: () => import('./index/index.module').then(m => m.IndexModule)
   },
   {
-    path: AddRoutersPath.errors,
+    path: AppRoutersPath.errors,
     loadChildren: () => import('./errors/errors.module').then(m => m.ErrorsModule)
   },
   {
     path: '**',
-    redirectTo: AddRoutersPath.errors,
+    redirectTo: AppRoutersPath.errors,
   }
 ];
 

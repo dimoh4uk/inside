@@ -1,4 +1,4 @@
-export enum AddRoutersPath {
+export enum AppRoutersPath {
   index = 'index',
   errors = 'errors'
 }

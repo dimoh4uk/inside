@@ -1,0 +1,35 @@
+@import "~src/styles/variables";
+@import "~src/styles/helpers/all";
+
+.video-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: 100%;
+  margin: auto;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.site-header {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .header-content {
+    width: 100%;
+  }
+}
+
+.action-block {
+  display: flex;
+  margin: rem-calc(93) 0 rem-calc(106);
+}
+
+app-header-button {
+  width: 50%;
+}

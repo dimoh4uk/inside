@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'TTCommons';
+  font-style: normal;
+  font-weight: 300;
+  src: url("3A65B0_2_0.woff2") format("woff2"),
+  url("3A65B0_2_0.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'TTCommons';
+  font-style: normal;
+  font-weight: 500;
+  src: url("3A65B0_1_0.woff2") format("woff2"),
+  url("3A65B0_1_0.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'TTCommons';
+  font-style: normal;
+  font-weight: 600;
+  src: url("3A65B0_0_0.woff2") format("woff2"),
+  url("3A65B0_0_0.woff") format("woff");
+}

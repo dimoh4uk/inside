@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { ErrorsRoutingModule } from './errors-routing.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -10,7 +9,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     NotFoundComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     ErrorsRoutingModule
   ]
 })

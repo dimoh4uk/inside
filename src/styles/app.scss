@@ -1,19 +1,29 @@
 @import "variables";
 @import "helpers/all";
 @import "modules/all";
+@import "../fonts/font.css";
 
 html {
-  font-size: rem-calc($base-fort-size);
-
+  font-size: $base-fort-size+px;
 }
 
 body {
   background: $site-bg;
   color: $site-color;
   box-sizing: border-box;
+  font-family: "TTCommons", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   min-height: 100vh;
+  font-weight: $font_light;
   margin: 0;
   padding: 0;
+  width: 100%;
+
+  &:before {
+    content: '';
+    display: table;
+    height: 0;
+    clear: both;
+  }
 }
 
 * {
