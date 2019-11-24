@@ -1,0 +1,6 @@
+<div class="project-slider" [id]="id">
+  <div *ngFor="let video of videoList">
+<!--    <img src="{{video.poster}}" alt="">-->
+    <app-video [video]="video"></app-video>
+  </div>
+</div>

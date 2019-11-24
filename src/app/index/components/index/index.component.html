@@ -1,28 +1,55 @@
-<header class="site-header">
-  <video
-    #bgVideo
-    loop
-    class="video-bg">
-    <!--           loop="loop" poster="bg/daisy-stock-poster.jpg">-->
-    <source src="assets/video/preload.mp4" type="video/mp4">
-  </video>
-  <div class="header-content container">
-    <h1 class="site-title" [@pageTitleTrigger]="getTriggerStatus()">
-      The site is on track
-    </h1>
+<div fullpage id="fullpage" [options]="config" (ref)="getRef($event)">
+  <div class="section">
+    <header class="site-header">
+      <video
+        #bgVideo
+        loop
+        class="video-bg">
+        <!--           loop="loop" poster="bg/daisy-stock-poster.jpg">-->
+        <source src="assets/video/preload.mp4" type="video/mp4">
+      </video>
+      <div class="header-content container">
+        <h1 class="site-title" [@pageTitleTrigger]="getTriggerStatus()">
+          The site is on track
+        </h1>
 
-    <div class="action-block">
-      <app-header-button
-        (click)="play()"
-        (keyup)="play($event)"
-        [buttonText]="'Play sowreel'"
-      ></app-header-button>
-      <!--      <button (click)="mute()">mute video</button>-->
-    </div>
-    <app-site-bar></app-site-bar>
+        <div class="action-block">
+          <app-header-button
+            (click)="play()"
+            (keyup)="play($event)"
+            [buttonText]="'Play sowreel'"
+          ></app-header-button>
+          <!--      <button (click)="mute()">mute video</button>-->
+        </div>
+        <app-site-bar></app-site-bar>
+      </div>
+    </header>
   </div>
-</header>
-
-<section class="site-section">
-  <router-outlet></router-outlet>
-</section>
+  <ng-container *ngIf="projects && projects.length">
+    <div class="section" *ngFor="let project of projects">
+      <div class="container">
+        <section class="site-section">
+          <div class="slider">
+            <app-video-slider [videoList]="project.videos"></app-video-slider>
+          </div>
+          <div class="info">
+            <div class="title section-title">
+              {{project.name}}
+            </div>
+            <div class="data">
+              <div class="title-l2">
+                Location:
+              </div>
+              <div class="title-l3">
+                Location: {{project.location}}
+              </div>
+              <div class="description">
+                {{project.description}}
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </ng-container>
+</div>

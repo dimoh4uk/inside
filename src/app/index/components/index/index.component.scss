@@ -15,10 +15,12 @@
 }
 
 .site-header {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
+  max-height: 100vh;
+  overflow: hidden;
 
   .header-content {
     width: 100%;
@@ -32,4 +34,28 @@
 
 app-header-button {
   width: 50%;
+}
+
+.info {
+  display: flex;
+  width: 100%;
+  margin-top: rem-calc(90);
+}
+
+.title {
+  width: 40%;
+}
+
+.data {
+  width: 60%;
+}
+
+.title-l2 {
+  margin-bottom: rem-calc(5);
+  font-weight: 600;
+}
+
+.description {
+  margin: rem-calc(30) 0;
+  font-weight: 300;
 }

@@ -42,3 +42,15 @@ body {
   @extend .h2;
   font-weight: 600;
 }
+
+.tns-visually-hidden {
+  display: none;
+}
+
+.site-section {
+  margin: rem-calc(90) 0;
+}
+
+.section-title {
+  font-size: rem-calc(28);
+}

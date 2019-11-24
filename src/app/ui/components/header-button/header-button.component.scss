@@ -7,6 +7,9 @@
   display: flex;
   cursor: pointer;
 
+  &:focus {
+    outline: none;
+  }
 
   &:hover {
     .circle {

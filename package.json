@@ -21,7 +21,11 @@
     "@angular/router": "~8.2.14",
     "@fullpage/angular-fullpage": "0.0.14",
     "bulma": "^0.8.0",
+    "fullpage.js": "^3.0.7",
+    "install": "^0.13.0",
+    "npm": "^6.13.1",
     "rxjs": "~6.4.0",
+    "tiny-slider": "^2.9.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
