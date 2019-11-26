@@ -1,10 +1,13 @@
 import { Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SiteSateService } from '../../../core/services/site-sate.service';
+import { MediaQueryService } from '../../../core/services/media-query.service';
 
 enum TriggerName {
   circle = 'circleTrigger',
   arrow = 'arrowTrigger',
+  arrowPhone = 'arrowTriggerPhone',
+  title = 'titleTrigger',
 }
 
 enum StateName {
@@ -45,6 +48,28 @@ enum StateName {
         animate('0.7s')
       ]),
     ]),
+    trigger(TriggerName.arrowPhone, [
+      state(StateName.stop, style({
+        left: '*',
+      })),
+      state(StateName.start, style({
+        left: '50%',
+      })),
+      transition(`${StateName.stop}<=>${StateName.start}`, [
+        animate('0.7s')
+      ]),
+    ]),
+    trigger(TriggerName.title, [
+      state(StateName.stop, style({
+        width: '*',
+      })),
+      state(StateName.start, style({
+        width: '100%',
+      })),
+      transition(`${StateName.stop}<=>${StateName.start}`, [
+        animate('0.7s')
+      ]),
+    ]),
   ]
 })
 export class HeaderButtonComponent implements OnInit {
@@ -55,6 +80,7 @@ export class HeaderButtonComponent implements OnInit {
 
   constructor(
     protected siteSateService: SiteSateService,
+    protected mediaQueryService: MediaQueryService,
   ) {
   }
 

@@ -5,7 +5,14 @@ $base-fort-size: 16;
 $site-bg: $black-900;
 $site-color: $white-100;
 
-
 $font_light: 300;
 $font_bold: 500;
 $font_extra_bold: 600;
+
+// Responsiveness
+$gap: 32px;
+$tablet: 769px;
+$desktop: 960px + (2 * $gap);
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+

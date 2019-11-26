@@ -3,15 +3,11 @@
 
 .video-bg {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: auto;
-  height: 100%;
-  margin: auto;
-  overflow: hidden;
-  max-width: 100%;
+  top: 50%;
+  left: 50%;
+  width: 177.7vh;
+  height: 100vh;
+  transform: translate(-50%, -50%);
 }
 
 .site-header {
@@ -27,6 +23,24 @@
   }
 }
 
+
+.site-title {
+  position: relative;
+
+  .hidden-block {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 100%;
+    background: #000;
+    display: none;
+    @include mobile() {
+      display: block;
+    }
+  }
+}
+
 .action-block {
   display: flex;
   margin: rem-calc(93) 0 rem-calc(106);
@@ -34,6 +48,10 @@
 
 app-header-button {
   width: 50%;
+
+  @include mobile() {
+    width: 100%;
+  }
 }
 
 .info {

@@ -1,7 +1,18 @@
+@import "~src/styles/helpers/all";
+
 :host {
-  position: sticky;
   top: 0;
   display: flex;
   justify-content: space-between;
   width: 100%;
+  position: relative;
+  z-index: 1;
+
+  @include mobile {
+    position: fixed;
+    right: rem-calc(30);
+    left: rem-calc(30);
+    top: rem-calc(50);
+    width: auto;
+  }
 }

@@ -14,13 +14,32 @@
   &:hover {
     .circle {
       transform: translate(-50%, -50%) scale(1.1);
+      @include mobile() {
+        transform: translate(-50%, 50%) scale(1.1);;
+      }
     }
+  }
+
+  @include mobile() {
+    position: initial;
   }
 }
 
 .text {
   position: relative;
   padding-right: rem-calc(50);
+  @include mobile() {
+    position: initial;
+    padding: 0;
+    display: block;
+    width: 100%;
+    text-align: left;
+    .text-wrapper {
+      padding: 0;
+      text-align: center;
+      display: inline-block;
+    }
+  }
 }
 
 .circle {
@@ -34,6 +53,12 @@
   transform: translate(-50%, -50%);
   transition: 300ms ease;
   opacity: 0;
+  @include mobile() {
+    bottom: rem-calc(120);
+    transform: translate(-50%, 50%);
+    left: 50%;
+    top: initial;
+  }
 }
 
 .triangle {
@@ -46,4 +71,11 @@
   position: absolute;
   top: 50%;
   left: 100%;
+
+  @include mobile() {
+    left: rem-calc(30);
+    bottom: rem-calc(102);
+    top: initial;
+    transform: rotate(45deg) translate(-50%, -25%);
+  }
 }

@@ -1,4 +1,5 @@
 @import "../variables";
+@import "~bulma/sass/utilities/_all";
 
 @function rem-calc($px) {
   @return ($px/$base-fort-size)*1rem;
