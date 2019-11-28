@@ -18,6 +18,7 @@ import { VideoSliderComponent } from './components/video-slider/video-slider.com
     HeaderButtonComponent,
     VideoComponent,
     VideoSliderComponent,
+    SharedModule,
   ],
   imports: [
     SharedModule

@@ -1,0 +1,39 @@
+@import "~src/styles/variables";
+@import "~src/styles/helpers/all";
+
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+app-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.7vh;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  @include mobile() {
+    max-width: initial;
+  }
+}
+
+.main-block {
+  height: 100%;
+  align-items: center;
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+.stub {
+  height: rem-calc(42);
+  margin: rem-calc(93) 0 rem-calc(106);
+}

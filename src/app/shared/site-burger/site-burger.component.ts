@@ -1,4 +1,5 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
+import { fadeIn, fadeOut } from '../../core/animation';
 
 export interface SiteMenuItem {
   label: string;
@@ -8,9 +9,16 @@ export interface SiteMenuItem {
 @Component({
   selector: 'app-site-burger',
   templateUrl: './site-burger.component.html',
-  styleUrls: ['./site-burger.component.scss']
+  styleUrls: ['./site-burger.component.scss'],
+  animations: [
+    fadeIn,
+    fadeOut,
+  ]
 })
 export class SiteBurgerComponent implements OnInit {
+  @HostBinding('@fadeIn') public fadeIn;
+  @HostBinding('@fadeOut') public fadeOut;
+
   @Input() menu: Array<SiteMenuItem> = [
     {
       label: 'Blog',
@@ -27,9 +35,8 @@ export class SiteBurgerComponent implements OnInit {
   }
 
   @HostListener('click', ['$event'])
-  public toggle($event) {
-    debugger;
-    this.showMenu = !this.showMenu;
+  public toggle() {
+    // this.showMenu = !this.showMenu;
   }
 
   ngOnInit() {

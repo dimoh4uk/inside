@@ -10,23 +10,33 @@ export const projectsMock: Array<ProjectInterface> = [
       {
         title: 'first video',
         url: 'assets/video/preload.mp4',
-        poster: 'assets/img/poster1.jpg'
-      },   {
-        title: 'first video',
-        url: 'assets/video/preload.mp4',
-        poster: 'assets/img/poster1.jpg'
-      },   {
-        title: 'first video',
-        url: 'assets/video/preload.mp4',
-        poster: 'assets/img/poster1.jpg'
-      },   {
-        title: 'first video',
-        url: 'assets/video/preload.mp4',
+        autoplay: true,
+        muted: true,
         poster: 'assets/img/poster1.jpg'
       }, {
         title: 'first video',
         url: 'assets/video/preload.mp4',
+        autoplay: true,
+        muted: true,
         poster: 'assets/img/poster1.jpg'
+      }, {
+        title: 'first video',
+        url: 'assets/video/preload.mp4',
+        autoplay: true,
+        muted: true,
+        poster: 'assets/img/poster1.jpg'
+      }, {
+        title: 'first video',
+        url: 'assets/video/preload.mp4',
+        autoplay: true,
+        muted: true,
+        poster: 'assets/img/poster1.jpg'
+      }, {
+        title: 'first video',
+        url: 'assets/video/preload.mp4',
+        poster: 'assets/img/poster1.jpg',
+        autoplay: true,
+        muted: true,
       },
     ]
   }, {
@@ -38,26 +48,38 @@ export const projectsMock: Array<ProjectInterface> = [
       {
         title: 'first video',
         url: 'assets/video/preload.mp4',
+        autoplay: true,
+        muted: true,
         poster: 'assets/img/poster1.jpg'
       }, {
         title: 'first video',
         url: 'assets/video/preload.mp4',
+        autoplay: true,
+        muted: true,
         poster: 'assets/img/poster1.jpg'
       }, {
         title: 'first video',
         url: 'assets/video/preload.mp4',
+        autoplay: true,
+        muted: true,
         poster: 'assets/img/poster1.jpg'
       }, {
         title: 'first video',
         url: 'assets/video/preload.mp4',
+        autoplay: true,
+        muted: true,
         poster: 'assets/img/poster1.jpg'
       }, {
         title: 'first video',
         url: 'assets/video/preload.mp4',
+        autoplay: true,
+        muted: true,
         poster: 'assets/img/poster1.jpg'
       }, {
         title: 'first video',
         url: 'assets/video/preload.mp4',
+        autoplay: true,
+        muted: true,
         poster: 'assets/img/poster1.jpg'
       },
     ]

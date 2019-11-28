@@ -4,19 +4,19 @@
       <video
         #bgVideo
         loop
-        class="video-bg is-hidden-touch">
-        <!--           loop="loop" poster="bg/daisy-stock-poster.jpg">-->
+        class="video-bg">
         <source src="assets/video/show_reel.mp4" type="video/mp4">
       </video>
       <div class="header-content container">
         <h1 class="site-title is-hidden-mobile" [@pageTitleTrigger]="getTriggerStatus('pageTitleTrigger')">
-          The site is on track
+          Welcome
         </h1>
 
-        <h1 class="site-title is-hidden-tablet">
-          The site is on track
-          <span class="hidden-block" [@pageTitleHidden]="getTriggerStatus('pageTitleHidden')"></span>
-        </h1>
+        <div class="overflow-hidden">
+          <h1 class="site-title is-hidden-tablet" [@pageTitleHidden]="getTriggerStatus('pageTitleHidden')">
+            Welcome
+          </h1>
+        </div>
 
         <div class="action-block">
           <app-header-button

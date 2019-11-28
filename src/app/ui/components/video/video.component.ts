@@ -3,6 +3,8 @@ import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@
 export interface VideoInterface {
   title: string;
   poster: string;
+  autoplay: boolean;
+  muted: boolean;
   url: string;
 }
 
@@ -14,7 +16,6 @@ export interface VideoInterface {
 export class VideoComponent implements OnInit {
   @Input() public video: VideoInterface;
   @ViewChild('videoLink', {static: true}) videoLink: ElementRef;
-  protected timer;
 
   protected videoElement;
 
@@ -23,29 +24,16 @@ export class VideoComponent implements OnInit {
 
   ngOnInit() {
     this.videoElement = this.videoLink.nativeElement;
-    console.log('videoElement', this.videoElement);
 
-    setTimeout(() => this.toggleVideoStatus(), 0);
-    this.mute();
+    this.initMute();
+    setTimeout(() => this.initAutoPlay(), 0);
   }
 
-  public mute(): void {
-    this.videoElement.muted = !this.videoElement.muted;
+  public initMute(): void {
+    this.videoElement.muted = this.video.muted;
   }
 
-  public toggleVideoStatus() {
-    this.videoElement.autoplay = !this.videoElement.autoplay;
+  public initAutoPlay() {
+    this.videoElement.autoplay = this.video.autoplay;
   }
-
-  @HostListener('mouseover')
-  mouseover() {
-    this.timer = setTimeout(() => this.videoElement.muted = false, 500);
-  }
-
-  @HostListener('mouseout')
-  mouseout() {
-    clearTimeout(this.timer);
-    this.videoElement.muted = true;
-  }
-
 }

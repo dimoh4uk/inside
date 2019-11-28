@@ -5,30 +5,40 @@ import { Subject } from 'rxjs';
 export class SiteSateService {
   public onPlay = new Subject();
   public headerAnimationStart = false;
-  protected playedLocal = false;
+  public onLoad = new Subject();
 
-  get played(): boolean {
+  protected playedLocal = false;
+  protected loadedLocal = false;
+
+  public startHeaderAnimation() {
+    this.headerAnimationStart = true;
+  }
+
+  get play(): boolean {
     return this.playedLocal;
   }
 
-  set played(value: boolean) {
+  set play(value: boolean) {
     this.playedLocal = value;
     this.onPlay.next(value);
   }
 
+
   public isPlayed(): boolean {
-    return this.played;
+    return this.play;
   }
 
-  public play(): void {
-    this.played = true;
+
+  get load(): boolean {
+    return this.loadedLocal;
   }
 
-  public stop(): void {
-    this.played = false;
+  set load(value: boolean) {
+    this.loadedLocal = value;
+    this.onLoad.next(value);
   }
 
-  public startHeaderAnimaton() {
-    this.headerAnimationStart = true;
+  public isLoaded(): boolean {
+    return this.load;
   }
 }

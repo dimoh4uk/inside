@@ -14,14 +14,18 @@
   &:hover {
     .circle {
       transform: translate(-50%, -50%) scale(1.1);
-      @include mobile() {
-        transform: translate(-50%, 50%) scale(1.1);;
-      }
+      //@include mobile() {
+      //  transform: translate(-50%, 50%) scale(1.1);;
+      //}
     }
   }
 
   @include mobile() {
     position: initial;
+    display: block;
+    video {
+      max-width: initial;
+    }
   }
 }
 
@@ -32,7 +36,6 @@
     position: initial;
     padding: 0;
     display: block;
-    width: 100%;
     text-align: left;
     .text-wrapper {
       padding: 0;
@@ -54,10 +57,8 @@
   transition: 300ms ease;
   opacity: 0;
   @include mobile() {
-    bottom: rem-calc(120);
-    transform: translate(-50%, 50%);
+    top: 100%;
     left: 50%;
-    top: initial;
   }
 }
 
@@ -73,9 +74,8 @@
   left: 100%;
 
   @include mobile() {
-    left: rem-calc(30);
-    bottom: rem-calc(102);
-    top: initial;
-    transform: rotate(45deg) translate(-50%, -25%);
+    left: rem-calc(5);
+    bottom: 0;
+    top: 100%;
   }
 }

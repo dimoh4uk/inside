@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: AppRoutersPath.index,
+    redirectTo: AppRoutersPath.preloader,
+  },
+  {
+    path: AppRoutersPath.preloader,
+    loadChildren: () => import('./preloader/preloader.module').then(m => m.PreloaderModule),
   },
   {
     path: AppRoutersPath.index,
@@ -20,7 +24,7 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: AppRoutersPath.errors,
-  }
+  },
 ];
 
 @NgModule({

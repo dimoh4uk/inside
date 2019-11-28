@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SiteSateService } from '../../../core/services/site-sate.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -6,6 +6,7 @@ import { HeaderButtonComponent } from '../../../ui/components/header-button/head
 import { ProjectInterface, ProjectsService } from '../../services/pojects/projects.service';
 import { HttpResponse } from '@angular/common/http';
 import { MediaQueryService } from '../../../core/services/media-query.service';
+import { fadeIn, fadeOut } from '../../../core/animation';
 
 enum TriggerName {
   pageTitle = 'pageTitleTrigger',
@@ -24,6 +25,7 @@ enum StateName {
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
   animations: [
+    fadeIn,
     trigger(TriggerName.pageTitle, [
       state(StateName.stop, style({
         paddingLeft: '0px',
@@ -37,13 +39,13 @@ enum StateName {
     ]),
     trigger(TriggerName.pageTitleHidden, [
       state(StateName.hide, style({
-        right: '100%',
+        left: '0',
       })),
       state(StateName.show, style({
-        right: '0',
+        left: '100%',
       })),
       transition(`${StateName.show}<=>${StateName.hide}`, [
-        animate('0.7s')
+        animate('500ms')
       ]),
     ])
   ]
@@ -51,8 +53,10 @@ enum StateName {
 
 })
 export class IndexComponent implements OnInit, AfterViewInit {
+  @HostBinding('@fadeIn') public fadeIn;
   @ViewChild('bgVideo', {static: true}) video: ElementRef;
   @ViewChild(HeaderButtonComponent, {static: false, read: ElementRef}) headerButton: ElementRef;
+
   public projects: Array<ProjectInterface>;
 
   config: any;
@@ -112,26 +116,20 @@ export class IndexComponent implements OnInit, AfterViewInit {
   }
 
   public play($event?) {
-    if (this.timerHeaderAnimation) {
+    if ($event && $event.key !== 'Enter') {
       return;
     }
+
     if (!this.siteSateService.headerAnimationStart) {
-      this.timerHeaderAnimation = setInterval(() => {
-        this.siteSateService.startHeaderAnimaton();
-        this.timerHeaderAnimation = undefined;
-      }, 1500);
-      return;
+      this.siteSateService.startHeaderAnimation();
+      this.timerHeaderAnimation = undefined;
     }
 
     if (this.isPlayed()) {
       return;
     }
 
-    if ($event && $event.key !== 'Enter') {
-      return;
-    }
-
-    this.siteSateService.play();
+    this.siteSateService.play = true;
     this.loadProjects();
   }
 
@@ -140,7 +138,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
       this.projects = response.body;
       setTimeout(() => {
         this.fullpageApi.build();
-        this.fullpageApi.moveTo(2);
       }, 0);
     });
   }
