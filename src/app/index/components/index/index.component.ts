@@ -12,6 +12,7 @@ enum TriggerName {
   pageTitle = 'pageTitleTrigger',
   pageTitleHidden = 'pageTitleHidden',
   backEnabled = 'backEnabledTrigger',
+  previewSection = 'previewSection',
 }
 
 enum StateName {
@@ -61,10 +62,27 @@ enum StateName {
       transition(`${StateName.active}<=>${StateName.disabled}`, [
         animate('0.7s')
       ]),
+    ]),
+    trigger(TriggerName.previewSection, [
+      state(StateName.show, style({
+        position: 'absolute',
+        left: '0',
+        top: '0',
+        right: '0',
+        marginTop: '-80px'
+      })),
+      state(StateName.hide, style({
+        position: '*',
+        left: '*',
+        right: '*',
+        top: '0',
+        marginTop: '0'
+      })),
+      transition(`${StateName.hide} <=> ${StateName.show}`, [
+        animate('500ms')
+      ]),
     ])
   ]
-
-
 })
 export class IndexComponent implements OnInit, AfterViewInit {
   @HostBinding('@fadeIn') public fadeIn;
@@ -75,6 +93,9 @@ export class IndexComponent implements OnInit, AfterViewInit {
   public pageTitle = 'YYYY 2018';
   public fullPageConfig: any;
   public fullpageApi: any;
+
+  protected projectsLoaded: boolean;
+  protected currentSection = null;
 
   constructor(
     protected router: Router,
@@ -87,15 +108,22 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
       // fullpage options
       // licenseKey: 'YOUR LICENSE KEY HERE',
-      anchors: ['firstPage', 'secondPage', 'thirdPage'],
       parallax: true,
+      css3: false,
       parallaxOptions: {type: 'reveal', percentage: 62, property: 'translate'},
       // fullpage callbacks
       afterResize: () => {
         console.log('After resize');
       },
-      afterLoad: (origin, destination, direction) => {
-        console.log('afterLoad');
+      onLeave: (origin, destination) => {
+        this.currentSection = null;
+      },
+      afterLoad: (origin, destination) => {
+        setTimeout(() => {
+          console.log('afterLoad');
+          // tslint:disable-next-line:radix
+          this.currentSection = parseInt(destination.item.dataset.sectionId) || 0;
+        }, 300);
       }
     };
   }
@@ -144,12 +172,14 @@ export class IndexComponent implements OnInit, AfterViewInit {
   }
 
   protected loadProjects() {
-    this.projectsService.getProjects().subscribe((response: HttpResponse<Array<ProjectInterface>>) => {
-      this.projects = response.body;
-      setTimeout(() => {
-        this.fullpageApi.build();
-      }, 0);
-    });
+    this.projectsService.getProjects()
+      .subscribe((response: HttpResponse<Array<ProjectInterface>>) => {
+        this.projects = response.body;
+        setTimeout(() => {
+          this.fullpageApi.build();
+          this.projectsLoaded = true;
+        }, 0);
+      });
   }
 
   protected get videoElement(): HTMLVideoElement {
@@ -172,8 +202,23 @@ export class IndexComponent implements OnInit, AfterViewInit {
     if (this.mediaQueryService.isPhone() && (TriggerName.pageTitleHidden === triggerName)) {
       return this.headerAnimationStart ? StateName.show : StateName.hide;
     }
+  }
 
+  public getPreviewTriggerStatus(section) {
+    if (this.mediaQueryService.isPhone()) {
+      return StateName.hide;
+    }
 
+    const isInitial = this.currentSection === null;
+    if (!this.headerAnimationStart || !this.projectsLoaded || isInitial) {
+      return StateName.hide;
+    }
+
+    // tslint:disable-next-line:radix
+    const sectionId = parseInt(section.dataset.sectionId);
+    const nextSection = this.currentSection + 1;
+    const currentIsNext = sectionId === nextSection;
+    return currentIsNext ? StateName.show : StateName.hide;
   }
 
   public back(): void {

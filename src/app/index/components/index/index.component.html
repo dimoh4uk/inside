@@ -38,8 +38,10 @@
     </header>
   </div>
   <ng-container *ngIf="projects && projects.length">
-    <div class="section" *ngFor="let project of projects">
-      <div class="container">
+    <div class="section"
+         *ngFor="let project of projects; let i = index"
+         [attr.data-section-id]="i+1" #section>
+      <div class="container" [@previewSection]="getPreviewTriggerStatus(section)">
         <section class="site-section">
           <div class="slider">
             <app-video-slider [videoList]="project.videos"></app-video-slider>
