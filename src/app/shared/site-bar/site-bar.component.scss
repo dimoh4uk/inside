@@ -1,19 +1,80 @@
 @import "~src/styles/helpers/all";
 
 :host {
-  top: 0;
   display: flex;
-  justify-content: space-between;
   width: 100%;
   position: relative;
-  z-index: 1;
+  justify-content: space-between;
+  align-items: center;
+
+  &:before {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #000;
+  }
+
+  &.open {
+    &:before {
+      content: "";
+    }
+  }
 
   @include mobile {
     position: fixed;
     right: rem-calc(30);
-    left: rem-calc(30);
+    left: rem-calc(15);
     top: rem-calc(50);
     width: auto;
     z-index: 40;
+    .logo {
+      order: 1;
+    }
+    .burger {
+      order: 0;
+    }
+  }
+}
+
+.logo, .burger {
+  z-index: 10;
+  position: relative;
+}
+
+.contact {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  display: flex;
+  flex-direction: column;
+  @include mobile {
+    bottom: initial;
+    height: 100vh;
+    left: rem-calc(15);
+    top: rem-calc(20);
+  }
+}
+
+.info {
+  padding: rem-calc(140) 0;
+  width: 100%;
+  @include mobile {
+    order: 1;
+    padding: 20vh 0;
+  }
+}
+
+.social {
+  display: flex;
+
+  li + li {
+    margin-left: rem-calc(12);
+  }
+
+  @include mobile {
+    order: 2;
   }
 }

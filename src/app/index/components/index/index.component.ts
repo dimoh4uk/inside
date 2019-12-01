@@ -11,6 +11,7 @@ import { fadeIn, fadeOut } from '../../../core/animation';
 enum TriggerName {
   pageTitle = 'pageTitleTrigger',
   pageTitleHidden = 'pageTitleHidden',
+  backEnabled = 'backEnabledTrigger',
 }
 
 enum StateName {
@@ -18,6 +19,8 @@ enum StateName {
   start = 'start',
   show = 'show',
   hide = 'hide',
+  active = 'active',
+  disabled = 'disabled',
 }
 
 @Component({
@@ -47,6 +50,17 @@ enum StateName {
       transition(`${StateName.show}<=>${StateName.hide}`, [
         animate('500ms')
       ]),
+    ]),
+    trigger(TriggerName.backEnabled, [
+      state(StateName.active, style({
+        paddingRight: '100px',
+      })),
+      state(StateName.disabled, style({
+        paddingRight: 0,
+      })),
+      transition(`${StateName.active}<=>${StateName.disabled}`, [
+        animate('0.7s')
+      ]),
     ])
   ]
 
@@ -58,12 +72,9 @@ export class IndexComponent implements OnInit, AfterViewInit {
   @ViewChild(HeaderButtonComponent, {static: false, read: ElementRef}) headerButton: ElementRef;
 
   public projects: Array<ProjectInterface>;
-
-  config: any;
-  fullpageApi: any;
-
-  timerHeaderAnimation;
-
+  public pageTitle = 'YYYY 2018';
+  public fullPageConfig: any;
+  public fullpageApi: any;
 
   constructor(
     protected router: Router,
@@ -72,7 +83,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     protected mediaQueryService: MediaQueryService,
   ) {
 
-    this.config = {
+    this.fullPageConfig = {
 
       // fullpage options
       // licenseKey: 'YOUR LICENSE KEY HERE',
@@ -122,7 +133,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
     if (!this.siteSateService.headerAnimationStart) {
       this.siteSateService.startHeaderAnimation();
-      this.timerHeaderAnimation = undefined;
     }
 
     if (this.isPlayed()) {
@@ -146,15 +156,28 @@ export class IndexComponent implements OnInit, AfterViewInit {
     return this.video.nativeElement;
   }
 
+  get headerAnimationStart(): boolean {
+    return this.siteSateService.headerAnimationStart;
+  }
+
   public getTriggerStatus(triggerName: any): StateName {
-    if (!this.mediaQueryService.isPhone() && (TriggerName.pageTitle === triggerName)) {
-      return this.siteSateService.headerAnimationStart ? StateName.start : StateName.stop;
+    if (TriggerName.backEnabled === triggerName) {
+      return this.headerAnimationStart ? StateName.active : StateName.disabled;
     }
 
+    if (!this.mediaQueryService.isPhone() && (TriggerName.pageTitle === triggerName)) {
+      return this.headerAnimationStart ? StateName.start : StateName.stop;
+    }
 
     if (this.mediaQueryService.isPhone() && (TriggerName.pageTitleHidden === triggerName)) {
-      return this.siteSateService.headerAnimationStart ? StateName.show : StateName.hide;
+      return this.headerAnimationStart ? StateName.show : StateName.hide;
     }
+
+
+  }
+
+  public back(): void {
+    this.siteSateService.stopHeaderAnimation();
   }
 
 }

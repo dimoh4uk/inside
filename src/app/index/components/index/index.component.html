@@ -1,4 +1,4 @@
-<div fullpage id="fullpage" [options]="config" (ref)="getRef($event)">
+<div fullpage id="fullpage" [options]="fullPageConfig" (ref)="getRef($event)">
   <div class="section">
     <header class="site-header">
       <video
@@ -8,13 +8,20 @@
         <source src="assets/video/show_reel.mp4" type="video/mp4">
       </video>
       <div class="header-content container">
+        <button
+          class="back-button"
+          [@backEnabledTrigger]="getTriggerStatus('backEnabledTrigger')"
+          (click)="back()"
+          [disabled]="!headerAnimationStart">
+          Back
+        </button>
         <h1 class="site-title is-hidden-mobile" [@pageTitleTrigger]="getTriggerStatus('pageTitleTrigger')">
-          Welcome
+          {{pageTitle}}
         </h1>
 
         <div class="overflow-hidden">
           <h1 class="site-title is-hidden-tablet" [@pageTitleHidden]="getTriggerStatus('pageTitleHidden')">
-            Welcome
+            {{pageTitle }}
           </h1>
         </div>
 
@@ -22,7 +29,7 @@
           <app-header-button
             (click)="play()"
             (keyup)="play($event)"
-            [buttonText]="'Play sowreel'"
+            [buttonText]="'Play showreel'"
           ></app-header-button>
           <!--      <button (click)="mute()">mute video</button>-->
         </div>

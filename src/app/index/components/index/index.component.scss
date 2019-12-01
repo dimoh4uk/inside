@@ -22,7 +22,7 @@
   position: relative;
   z-index: 2;
   @include mobile() {
-    margin-bottom: rem-calc(100);
+    margin-bottom: rem-calc(130);
   }
 }
 
@@ -84,4 +84,23 @@ app-header-button {
 .description {
   margin: rem-calc(30) 0;
   font-weight: 300;
+}
+
+.back-button {
+  text-transform: uppercase;
+  padding: rem-calc(15) 0;
+  font-size: rem-calc(15);
+  display: inline-block;
+  margin-bottom: rem-calc(43);
+  border: none;
+  border-bottom: rem-calc(3) solid $white;
+  text-align: left;
+  background: none;
+  color: $white;
+  font-weight: 600;
+  cursor: pointer;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
 }

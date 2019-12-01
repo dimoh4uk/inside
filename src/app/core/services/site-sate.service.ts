@@ -14,6 +14,10 @@ export class SiteSateService {
     this.headerAnimationStart = true;
   }
 
+  public stopHeaderAnimation() {
+    this.headerAnimationStart = false;
+  }
+
   get play(): boolean {
     return this.playedLocal;
   }
