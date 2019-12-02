@@ -33,6 +33,13 @@ app-video {
   width: 100%;
 }
 
+.site-title {
+  margin: 10vh 0 30vh;
+  @include mobile() {
+    margin: initial;
+  }
+}
+
 .stub {
   height: rem-calc(42);
   margin: rem-calc(93) 0 rem-calc(106);

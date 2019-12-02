@@ -8,7 +8,7 @@ export enum Device {
   phone,
 }
 
-const screenSizes = {
+export const screenSizes = {
   [Device.desktop]: {from: 1281, to: '*'},
   [Device.table]: {from: 641, to: 1280},
   [Device.phone]: {form: 0, to: 640},

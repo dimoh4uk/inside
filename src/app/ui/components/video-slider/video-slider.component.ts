@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { tns } from 'tiny-slider/src/tiny-slider';
+import { Device, screenSizes } from '../../../core/services/media-query.service';
 
 
 let count = 0;
@@ -24,17 +25,22 @@ export class VideoSliderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    const phone = screenSizes[Device.phone].to;
     tns({
       container: '#' + this.id,
-      items: 3,
+      items: 1,
       mouseDrag: true,
       speed: 400,
       nav: false,
       // arrowKeys: false,
       controls: false,
+      responsive: {
+        640: {
+          items: 3
+        }
+      }
       // navContainer: false,
       // controlsContainer: false,
     });
   }
-
 }

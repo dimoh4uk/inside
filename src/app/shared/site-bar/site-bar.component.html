@@ -1,25 +1,27 @@
-<a [routerLink]="'/'" class="logo">
-  <img src="assets/img/inside_logo.svg" alt="inside_logo">
-</a>
-<div class="burger">
-  <app-site-burger></app-site-burger>
-</div>
+<div class="wrapper">
+  <a [routerLink]="'/'" class="logo">
+    <img src="assets/img/inside_logo.svg" alt="inside_logo">
+  </a>
+  <div class="burger">
+    <app-site-burger></app-site-burger>
+  </div>
 
-<div class="contact" [@fadeIn] *ngIf="showContacts">
-  <ul class="social">
-    <li *ngFor="let item of socialList">
-      <a [href]="item.link"><img [src]="'assets/img/'+item.icon" alt="icon"></a>
-    </li>
-  </ul>
-  <ul class="info">
-    <li>
-      Moscow. Red October. 23/21
-    </li>
-    <li>
-      +7 946 000 00 00
-    </li>
-    <li>
-      example@gmail.com
-    </li>
-  </ul>
+  <div class="contact" [@fadeIn] *ngIf="showContacts">
+    <ul class="social">
+      <li *ngFor="let item of socialList">
+        <a [href]="item.link"><img [src]="'assets/img/'+item.icon" alt="icon"></a>
+      </li>
+    </ul>
+    <ul class="info">
+      <li>
+        Moscow. Red October. 23/21
+      </li>
+      <li>
+        +7 946 000 00 00
+      </li>
+      <li>
+        example@gmail.com
+      </li>
+    </ul>
+  </div>
 </div>

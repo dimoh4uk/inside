@@ -38,7 +38,7 @@ enum StateName {
         paddingLeft: '92px',
       })),
       transition(`${StateName.stop}<=>${StateName.start}`, [
-        animate('0.7s')
+        animate('0.7s ease')
       ]),
     ]),
     trigger(TriggerName.pageTitleHidden, [
@@ -49,7 +49,7 @@ enum StateName {
         left: '100%',
       })),
       transition(`${StateName.show}<=>${StateName.hide}`, [
-        animate('500ms')
+        animate('500ms ease')
       ]),
     ]),
     trigger(TriggerName.backEnabled, [
@@ -60,7 +60,7 @@ enum StateName {
         paddingRight: 0,
       })),
       transition(`${StateName.active}<=>${StateName.disabled}`, [
-        animate('0.7s')
+        animate('0.7s ease')
       ]),
     ]),
     trigger(TriggerName.previewSection, [
@@ -69,7 +69,7 @@ enum StateName {
         left: '0',
         top: '0',
         right: '0',
-        marginTop: '-80px'
+        marginTop: '-9vh'
       })),
       state(StateName.hide, style({
         position: '*',
@@ -79,7 +79,7 @@ enum StateName {
         marginTop: '0'
       })),
       transition(`${StateName.hide} <=> ${StateName.show}`, [
-        animate('500ms')
+        animate('500ms ease')
       ]),
     ])
   ]
@@ -128,10 +128,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
     };
   }
 
-  isPlayed() {
-    return this.siteSateService.isPlayed();
-  }
-
   getRef(fullPageRef) {
     this.fullpageApi = fullPageRef;
   }
@@ -161,19 +157,18 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
     if (!this.siteSateService.headerAnimationStart) {
       this.siteSateService.startHeaderAnimation();
-    }
-
-    if (this.isPlayed()) {
+    } else {
       return;
     }
 
-    this.siteSateService.play = true;
     this.loadProjects();
   }
 
   protected loadProjects() {
-    this.projectsService.getProjects()
-      .subscribe((response: HttpResponse<Array<ProjectInterface>>) => {
+    this.projectsService
+      .getProjects()
+      .toPromise()
+      .then((response: any) => {
         this.projects = response.body;
         setTimeout(() => {
           this.fullpageApi.build();
@@ -205,10 +200,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
   }
 
   public getPreviewTriggerStatus(section) {
-    if (this.mediaQueryService.isPhone()) {
-      return StateName.hide;
-    }
-
     const isInitial = this.currentSection === null;
     if (!this.headerAnimationStart || !this.projectsLoaded || isInitial) {
       return StateName.hide;
@@ -222,6 +213,8 @@ export class IndexComponent implements OnInit, AfterViewInit {
   }
 
   public back(): void {
+    this.projects = undefined;
+    this.projectsLoaded = false;
     this.siteSateService.stopHeaderAnimation();
   }
 

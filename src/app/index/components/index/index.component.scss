@@ -49,6 +49,7 @@
   display: flex;
   padding: rem-calc(93) 0 rem-calc(106);
   @include mobile() {
+    padding: 18% 0 25%;
     display: block;
     position: relative;
   }
@@ -66,14 +67,25 @@ app-header-button {
   display: flex;
   width: 100%;
   margin-top: rem-calc(90);
+  @include mobile() {
+    display: block;
+    margin-top: 4vh;
+  }
 }
 
 .title {
   width: 40%;
+  @include mobile() {
+    width: initial;
+  }
 }
 
 .data {
   width: 60%;
+  @include mobile() {
+    width: initial;
+    margin: rem-calc(20) 0;
+  }
 }
 
 .title-l2 {

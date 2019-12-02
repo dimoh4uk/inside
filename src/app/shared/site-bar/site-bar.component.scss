@@ -1,24 +1,37 @@
 @import "~src/styles/helpers/all";
 
 :host {
-  display: flex;
-  width: 100%;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
+  display: block;
 
-  &:before {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background: #000;
+  &.fixed {
+    .wrapper {
+      position: fixed;
+      top: rem-calc(50);
+      left: rem-calc(30);
+      right: rem-calc(30);
+    }
+
+    &.open {
+      .contact {
+        bottom: initial;
+        top: 100%;
+      }
+    }
+
+    .info {
+      order: 0;
+    }
+
+    .social {
+      order: 1;
+    }
   }
 
   &.open {
-    &:before {
-      content: "";
+    .wrapper {
+      &:before {
+        content: "";
+      }
     }
   }
 
@@ -26,7 +39,7 @@
     position: fixed;
     right: rem-calc(30);
     left: rem-calc(15);
-    top: rem-calc(50);
+    top: 5%;
     width: auto;
     z-index: 40;
     .logo {
@@ -41,6 +54,23 @@
 .logo, .burger {
   z-index: 10;
   position: relative;
+}
+
+.wrapper {
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+
+  &:before {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #000;
+  }
+
 }
 
 .contact {
