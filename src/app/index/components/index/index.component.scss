@@ -114,9 +114,6 @@ app-header-button {
 
   &[disabled] {
     cursor: not-allowed;
+    color: transparent;
   }
-}
-
-.test {
-  background: #ffffff;
 }

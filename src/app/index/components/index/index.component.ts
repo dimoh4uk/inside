@@ -79,7 +79,7 @@ enum StateName {
         marginTop: '0'
       })),
       transition(`${StateName.hide} <=> ${StateName.show}`, [
-        animate('500ms ease')
+        animate('1s ease')
       ]),
     ])
   ]

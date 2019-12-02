@@ -7,8 +7,14 @@
     .wrapper {
       position: fixed;
       top: rem-calc(50);
+      padding: 0 rem-calc(30);
+      left: 0;
+      right: 0;
+    }
+
+    .contact{
       left: rem-calc(30);
-      right: rem-calc(30);
+      right: rem-calc(15);
     }
 
     &.open {
@@ -61,6 +67,7 @@
   justify-content: space-between;
   align-items: center;
   display: flex;
+  padding: 0;
 
   &:before {
     position: fixed;
@@ -85,6 +92,7 @@
     height: 100vh;
     left: rem-calc(15);
     top: rem-calc(20);
+    right: initial;
   }
 }
 
