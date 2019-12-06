@@ -1,12 +1,28 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
+import Player from '@vimeo/player';
+import { Options } from 'vimeo__player';
 
 export interface VideoInterface {
-  title: string;
-  poster: string;
-  autoplay: boolean;
-  muted: boolean;
-  url: string;
+  id: number;
+  autopause?: boolean;
+  autoplay?: boolean;
+  background?: boolean;
+  byline?: boolean;
+  color?: boolean;
+  controls?: boolean;
+  dnt?: boolean;
+  height?: boolean;
 }
+
+const defaultVideoConfig = {
+  controls: false,
+  autoplay: true,
+  muted: true,
+  responsive: true,
+  byline: false,
+  loop: true,
+  dnt: true,
+};
 
 @Component({
   selector: 'app-video',
@@ -14,16 +30,23 @@ export interface VideoInterface {
   styleUrls: ['./video.component.scss']
 })
 export class VideoComponent implements OnInit {
-  @Input() public video: VideoInterface;
-  @ViewChild('videoLink', {static: true}) videoLink: ElementRef;
+  @Input() public video: Options;
 
-  protected videoElement;
+  @Output() public loaded = new EventEmitter();
 
-  constructor() {
+  protected hostSelector = this.elRef.nativeElement;
+  public player: Player;
+
+  constructor(protected elRef: ElementRef) {
   }
 
   ngOnInit() {
-    this.videoElement = this.videoLink.nativeElement;
+    const config = {...defaultVideoConfig, ...this.video};
+    this.player = new Player(this.hostSelector, config);
+    this.player.on('loaded', () => this.loaded.emit());
   }
 
+  public getPlayer() {
+    return this.player;
+  }
 }

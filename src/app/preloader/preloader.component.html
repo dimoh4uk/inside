@@ -4,4 +4,4 @@
     <app-site-bar></app-site-bar>
   </div>
 </div>
-<app-video [video]="preloaderVideo"></app-video>
+<app-video [video]="preloaderVideo" (loaded)="startTimer()"></app-video>

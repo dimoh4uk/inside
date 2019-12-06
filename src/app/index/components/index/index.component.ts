@@ -170,6 +170,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       .toPromise()
       .then((response: any) => {
         this.projects = response.body;
+        console.log('list=?', response.body[0].videos);
         setTimeout(() => {
           this.fullpageApi.build();
           this.projectsLoaded = true;

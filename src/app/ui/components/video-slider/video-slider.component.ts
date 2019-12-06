@@ -30,17 +30,15 @@ export class VideoSliderComponent implements OnInit, AfterViewInit {
       container: '#' + this.id,
       items: 1,
       mouseDrag: true,
+      loop: true,
       speed: 400,
       nav: false,
-      // arrowKeys: false,
       controls: false,
       responsive: {
-        640: {
+        [phone]: {
           items: 3
         }
       }
-      // navContainer: false,
-      // controlsContainer: false,
     });
   }
 }

@@ -1,9 +1,9 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
-import { VideoInterface } from '../ui/components/video/video.component';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SiteSateService } from '../core/services/site-sate.service';
 import { AppRoutersPath } from '../app-routers.path';
 import { fadeIn } from '../core/animation';
+import { Options } from '@vimeo/player';
 
 @Component({
   selector: 'app-preloader',
@@ -14,12 +14,9 @@ import { fadeIn } from '../core/animation';
   ]
 })
 export class PreloaderComponent implements OnInit {
-  public preloaderVideo: VideoInterface = {
-    muted: true,
+  public preloaderVideo: Options = {
     autoplay: true,
-    poster: '',
-    url: 'assets/video/preload.mp4',
-    title: 'preloader'
+    id: 359049695,
   };
 
   constructor(
@@ -29,13 +26,17 @@ export class PreloaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.siteSateService.load = true;
-    //   this.navigateToIndex();
-    // }, 2000);
+    this.siteSateService.load = false;
   }
 
   navigateToIndex() {
     this.router.navigate(['/' + AppRoutersPath.index]);
+  }
+
+  startTimer() {
+    setTimeout(() => {
+      this.siteSateService.load = true;
+      this.navigateToIndex();
+    }, 2000);
   }
 }
