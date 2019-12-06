@@ -24,16 +24,6 @@ export class VideoComponent implements OnInit {
 
   ngOnInit() {
     this.videoElement = this.videoLink.nativeElement;
-
-    this.initMute();
-    setTimeout(() => this.initAutoPlay(), 0);
   }
 
-  public initMute(): void {
-    this.videoElement.muted = this.video.muted;
-  }
-
-  public initAutoPlay() {
-    this.videoElement.autoplay = this.video.autoplay;
-  }
 }

@@ -29,10 +29,10 @@ export class PreloaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.siteSateService.load = true;
-      this.navigateToIndex();
-    }, 2000);
+    // setTimeout(() => {
+    //   this.siteSateService.load = true;
+    //   this.navigateToIndex();
+    // }, 2000);
   }
 
   navigateToIndex() {

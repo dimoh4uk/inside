@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@fullpage/angular-fullpage": "0.0.14",
+    "@vimeo/player": "^2.10.0",
     "bulma": "^0.8.0",
     "fullpage.js": "^3.0.7",
     "install": "^0.13.0",
