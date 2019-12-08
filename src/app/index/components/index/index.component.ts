@@ -80,7 +80,7 @@ enum StateName {
       state(StateName.show, style({
         position: 'absolute',
         left: '0',
-        top: '-10vh',
+        top: '-90px',
         right: '0',
       })),
       state(StateName.hide, style({
@@ -243,9 +243,12 @@ export class IndexComponent implements OnInit, AfterViewInit {
   }
 
   public back(): void {
-    this.projects = undefined;
-    this.projectsLoaded = false;
-    this.siteSateService.stopHeaderAnimation();
+    this.fullpageApi.moveTo(1);
+    setTimeout(() => {
+      this.projects = undefined;
+      this.projectsLoaded = false;
+      this.siteSateService.stopHeaderAnimation();
+    }, 500);
   }
 
 }

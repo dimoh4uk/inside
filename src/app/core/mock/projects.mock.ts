@@ -26,13 +26,13 @@ export const projectsMock: Array<ProjectInterface> = [
       'ATM buying/selling and storing physical gold.',
     videos: [
       {
-        id: 264385188,
+        id: 337206288,
       },
       {
         id: 240723331,
       },
       {
-        id: 337206288,
+        id: 264385188,
       },
     ]
   },

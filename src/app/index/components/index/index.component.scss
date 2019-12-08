@@ -128,8 +128,19 @@ app-header-button {
     color: transparent;
   }
 }
-.slider{
-  @include mobile(){
+
+.slider {
+  @include mobile() {
     margin: 0 - rem-calc(30);
   }
+}
+
+.site-section.fp-auto-height-responsive {
+  @include mobile() {
+    padding-bottom: rem-calc(90);
+  }
+}
+
+.section {
+  min-height: 100vh;
 }

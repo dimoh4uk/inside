@@ -38,7 +38,7 @@
     </header>
   </div>
   <ng-container *ngIf="projects && projects.length">
-    <div class="section"
+    <div class="section fp-auto-height-responsive"
          *ngFor="let project of projects; let i = index"
          [attr.data-section-id]="i+1" #section>
       <div class="container" [@previewSection]="getPreviewTriggerStatus(section)">
