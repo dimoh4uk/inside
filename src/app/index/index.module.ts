@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { UiModule } from '../ui/ui.module';
 import { ProjectsService } from './services/pojects/projects.service';
 import { AngularFullpageModule } from '@fullpage/angular-fullpage';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { AngularFullpageModule } from '@fullpage/angular-fullpage';
     ProjectsService,
   ],
   imports: [
+    CommonModule,
     SharedModule,
     IndexRoutingModule,
     UiModule,

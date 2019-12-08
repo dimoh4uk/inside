@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { tns } from 'tiny-slider/src/tiny-slider';
-import { Device, screenSizes } from '../../../core/services/media-query.service';
-
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {tns} from 'tiny-slider/src/tiny-slider';
+import {Device, screenSizes} from '../../../core/services/media-query.service';
 
 let count = 0;
 
@@ -21,7 +20,7 @@ export class VideoSliderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log('tns=>', tns);
+    console.log('tns=>', this.videoList.length, this.videoList);
   }
 
   ngAfterViewInit() {
@@ -30,7 +29,7 @@ export class VideoSliderComponent implements OnInit, AfterViewInit {
       container: '#' + this.id,
       items: 1,
       mouseDrag: true,
-      loop: true,
+      loop: false,
       speed: 400,
       nav: false,
       controls: false,

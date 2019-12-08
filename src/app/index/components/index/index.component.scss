@@ -22,7 +22,7 @@
   position: relative;
   z-index: 2;
   @include mobile() {
-    margin-bottom: rem-calc(130);
+    margin-top: 20vh;
   }
 }
 
@@ -34,7 +34,7 @@
   max-height: 100vh;
   overflow: hidden;
   @include mobile() {
-    align-items: flex-end;
+    align-items: end;
   }
 }
 
@@ -111,9 +111,25 @@ app-header-button {
   color: $white;
   font-weight: 600;
   cursor: pointer;
+  @include mobile() {
+    font-size: 0;
+    position: fixed;
+    width: 0;
+    height: 0;
+    border-bottom: 50px solid $white;
+    border-right: 50px solid transparent;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+  }
 
   &[disabled] {
     cursor: not-allowed;
     color: transparent;
+  }
+}
+.slider{
+  @include mobile(){
+    margin: 0 - rem-calc(30);
   }
 }
