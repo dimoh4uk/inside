@@ -7,10 +7,9 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild
 } from '@angular/core';
 import Player from '@vimeo/player';
-import {Options} from 'vimeo__player';
+import { Options } from 'vimeo__player';
 
 const defaultVideoConfig = {
   controls: false,
@@ -23,7 +22,14 @@ const defaultVideoConfig = {
   byline: false,
   loop: true,
   dnt: true,
+  currentTime: 0,
 };
+
+export interface VideoInterface extends Options {
+  currentTime?: number;
+}
+
+const videoPlayerUrl = 'https://player.vimeo.com/video';
 
 @Component({
   selector: 'app-video',
@@ -31,9 +37,12 @@ const defaultVideoConfig = {
   styleUrls: ['./video.component.scss']
 })
 export class VideoComponent implements OnInit {
-  @Input() public video: Options;
+  @Input() public video: VideoInterface;
   @Output() public loaded = new EventEmitter();
   @Input() public playByHover = false;
+  protected timeOut;
+  protected playCalled = false;
+  protected config: VideoInterface;
 
   protected hostSelector = this.elRef.nativeElement;
   public player: Player;
@@ -42,27 +51,74 @@ export class VideoComponent implements OnInit {
   }
 
   ngOnInit() {
-    const config = {...defaultVideoConfig, ...this.video};
-    this.player = new Player(this.hostSelector, config);
-    this.player.on('loaded', () => this.loaded.emit());
+    this.createConfig();
+    this.player = new Player(this.hostSelector, this.config);
+    this.player.setCurrentTime(this.config.currentTime);
+    this.player.on('loaded', async () => {
+      this.loaded.emit();
+    });
   }
 
   @HostListener('mouseover')
   public mouseover() {
-    if (this.playByHover) {
-
-      this.player.play();
+    if (!this.playByHover) {
+      return;
     }
+    this.clearTimeOut();
+    this.setTimeOut();
   }
 
   @HostListener('mouseout')
   public mouseout() {
-    if (this.playByHover) {
-      this.player.pause();
+    if (!this.playByHover) {
+      return;
     }
+
+    this.clearTimeOut();
+
+    if (this.playCalled) {
+      this.pause();
+    }
+  }
+
+  public pause(): Promise<any> {
+    this.playCalled = false;
+    return this.player.pause();
+  }
+
+  public play(): Promise<any> {
+    this.playCalled = true;
+    return this.player.play();
+  }
+
+
+  protected clearTimeOut() {
+    clearTimeout(this.timeOut);
+  }
+
+  protected setTimeOut() {
+    this.timeOut = setTimeout(() => {
+      this.play();
+    }, 300);
   }
 
   public getPlayer() {
     return this.player;
   }
+
+  public createConfig() {
+    const config = {...defaultVideoConfig, ...this.video} as VideoInterface;
+    config.url = this.createUrl(config);
+    this.config = config;
+  }
+
+  protected createUrl(config: VideoInterface): string {
+    let url = `${videoPlayerUrl}/${config.id}`;
+
+    if (config.currentTime) {
+      url = `${url}#t=${config.currentTime}`;
+    }
+    return url;
+  }
+
 }

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { VideoInterface } from '../../../ui/components/video/video.component';
 
 export interface ProjectInterface {
   id?: number;
-  videos: Array<any>;
+  videos: Array<VideoInterface>;
   name: string;
   location: string;
   description: string;

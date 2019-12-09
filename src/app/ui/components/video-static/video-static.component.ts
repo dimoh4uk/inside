@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
 export interface VideoInterface {
+  currentTime(currentTime: any);
   title: string;
   poster: string;
   autoplay: boolean;
