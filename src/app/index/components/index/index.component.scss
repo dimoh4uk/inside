@@ -69,7 +69,7 @@ app-header-button {
   margin-top: rem-calc(90);
   @include mobile() {
     display: block;
-    margin-top: 4vh;
+    padding-top: 4vh;
   }
 }
 
@@ -130,6 +130,7 @@ app-header-button {
 }
 
 .slider {
+  min-height: rem-calc(150);
   @include mobile() {
     margin: 0 - rem-calc(30);
   }
