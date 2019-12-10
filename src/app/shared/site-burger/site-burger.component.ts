@@ -1,6 +1,5 @@
-import { Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
-import { fadeIn, fadeOut } from '../../core/animation';
-import { ContactShowService } from '../../core/services/contact-show.service';
+import {Component, HostBinding, HostListener, OnInit} from '@angular/core';
+import {ContactShowService} from '../../core/services/contact-show.service';
 
 @Component({
   selector: 'app-site-burger',
@@ -10,7 +9,7 @@ import { ContactShowService } from '../../core/services/contact-show.service';
 export class SiteBurgerComponent implements OnInit {
   @HostBinding('class.open') public open = this.contactShowService.shown;
 
-  @HostListener('click', ['$event'])
+  @HostListener('click')
   public toggle() {
     this.contactShowService.toggle();
   }
@@ -27,5 +26,4 @@ export class SiteBurgerComponent implements OnInit {
         this.open = value;
       });
   }
-
 }

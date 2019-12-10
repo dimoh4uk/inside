@@ -87,6 +87,9 @@ export class HeaderButtonComponent implements OnInit {
   ngOnInit() {
   }
 
+  public isPhone() {
+    return this.mediaQueryService.isPhone();
+  }
 
   getAnimationState() {
     return this.siteSateService.headerAnimationStart ? StateName.start : StateName.stop;

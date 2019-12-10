@@ -1,11 +1,11 @@
-<span class="text" *ngIf="!mediaQueryService.isPhone()" [@arrowTrigger]="getAnimationState()">
+<span class="text" *ngIf="!isPhone()" [@arrowTrigger]="getAnimationState()">
   <span class="text-wrapper">
       {{buttonText}}
   </span>
   <div class="triangle"></div>
 </span>
 
-<span class="text" *ngIf="mediaQueryService.isPhone()">
+<span class="text" *ngIf="isPhone()">
   <span class="text-wrapper" [@titleTrigger]="getAnimationState()">
       {{buttonText}}
   </span>

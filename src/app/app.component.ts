@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { RouterOutlet } from '@angular/router';
-import { query, animate, style, transition, trigger } from '@angular/animations';
-import { AppRoutersPath } from './app-routers.path';
+import {RouterOutlet} from '@angular/router';
+import {query, animate, style, transition, trigger} from '@angular/animations';
+import {AppRoutersPath} from './app-routers.path';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,11 @@ import { AppRoutersPath } from './app-routers.path';
   styleUrls: ['./app.component.scss'],
   animations: [
     trigger('routeAnimation', [
-      transition(`${AppRoutersPath.preloader} <=>${AppRoutersPath.index}`, [
-        query(':leave', style({opacity: 1})),
-        query(':enter', style({opacity: 0})),
-        query(':leave', animate('2s ease', style({opacity: 0}))),
-        query(':enter', animate('1s', style({opacity: 1}))),
+      transition(`${AppRoutersPath.preloader} <=> ${AppRoutersPath.index}`, [
+        query(':leave', style({opacity: 1}), {optional: true}),
+        query(':enter', style({opacity: 0}), {optional: true}),
+        query(':leave', animate('2s ease', style({opacity: 0})), {optional: true}),
+        query(':enter', animate('1s', style({opacity: 1})), {optional: true}),
       ])
     ])
   ],
