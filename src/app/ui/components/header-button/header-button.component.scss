@@ -54,7 +54,6 @@
   border-radius: 50%;
   border: rem-calc(5) solid $white-100;
   transform: translate(-50%, -50%);
-  transition: 300ms ease;
   opacity: 0;
   @include mobile() {
     top: 100%;
