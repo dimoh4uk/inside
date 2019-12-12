@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, ElementRef, HostBinding, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {SiteSateService} from '../../../core/services/site-sate.service';
-import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
-import {HeaderButtonComponent} from '../../../ui/components/header-button/header-button.component';
-import {ProjectInterface, ProjectsService} from '../../services/pojects/projects.service';
-import {MediaQueryService} from '../../../core/services/media-query.service';
-import {fadeIn} from '../../../core/animation';
+import { AfterViewInit, Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { SiteSateService } from '../../../core/services/site-sate.service';
+import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
+import { HeaderButtonComponent } from '../../../ui/components/header-button/header-button.component';
+import { ProjectInterface, ProjectsService } from '../../services/pojects/projects.service';
+import { MediaQueryService } from '../../../core/services/media-query.service';
+import { fadeIn } from '../../../core/animation';
 
 @Component({
   selector: 'app-index',
@@ -86,6 +86,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
   public fullPageConfig: any;
   public fullpageApi: any;
 
+  protected loadedSliders = 0;
   protected projectsLoaded: boolean;
   protected currentSection = null;
 
@@ -180,10 +181,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       })
       .then((response: any) => {
         this.projects = response;
-        setTimeout(() => {
-          this.fullpageApi.build();
-          this.projectsLoaded = true;
-        }, 2000);
+        setTimeout(() => this.fullpageApi.build(), 0);
       });
   }
 
@@ -232,8 +230,20 @@ export class IndexComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.projects = undefined;
       this.projectsLoaded = false;
+      this.loadedSliders = 0;
       this.siteSateService.stopHeaderAnimation();
     }, 500);
   }
 
+  public loadedSlider() {
+    if (this.mediaQueryService.isPhone()) {
+      this.projectsLoaded = true;
+      return;
+    }
+
+    this.loadedSliders++;
+    if (this.projects && (this.loadedSliders === this.projects.length)) {
+      this.projectsLoaded = true;
+    }
+  }
 }

@@ -48,7 +48,7 @@
       <div class="container preview-block" [@previewSection]="getPreviewTriggerStatus(section)">
         <section class="site-section">
           <div class="slider">
-            <app-video-slider [videoList]="project.videos"></app-video-slider>
+            <app-video-slider (loaded)="loadedSlider()" [videoList]="project.videos"></app-video-slider>
           </div>
           <div class="info">
             <div class="title section-title">
