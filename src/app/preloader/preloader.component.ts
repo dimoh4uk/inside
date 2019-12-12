@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {SiteSateService} from '../core/services/site-sate.service';
-import {AppRoutersPath} from '../app-routers.path';
-import {fadeIn} from '../core/animation';
-import {Options} from '@vimeo/player';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SiteSateService } from '../core/services/site-sate.service';
+import { AppRoutersPath } from '../app-routers.path';
+import { fadeIn } from '../core/animation';
+import { Options } from '@vimeo/player';
 
 @Component({
   selector: 'app-preloader',
@@ -38,5 +38,9 @@ export class PreloaderComponent implements OnInit {
 
   navigateToIndex() {
     this.router.navigate(['/' + AppRoutersPath.index]);
+  }
+
+  loaded() {
+    console.log('sdasdasd');
   }
 }

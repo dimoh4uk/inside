@@ -9,8 +9,8 @@ import {
   Output,
 } from '@angular/core';
 import Player from '@vimeo/player';
-import {Options} from 'vimeo__player';
-import {MediaQueryService} from '../../../core/services/media-query.service';
+import { Options } from 'vimeo__player';
+import { MediaQueryService } from '../../../core/services/media-query.service';
 
 const defaultVideoConfig = {
   controls: false,
@@ -41,6 +41,7 @@ export class VideoComponent implements OnInit {
   @Input() public video: VideoInterface;
   @Output() public loaded = new EventEmitter();
   @Input() public playByHover = false;
+
   protected timeOut;
   protected playCalled = false;
   protected config: VideoInterface;
@@ -59,12 +60,10 @@ export class VideoComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.createConfig();
     this.player = new Player(this.hostSelector, this.config);
-    this.player.setCurrentTime(this.config.currentTime);
-
-    this.player.on('loaded', () => {
+    this.player.ready().then(() => {
+      this.player.setCurrentTime(this.config.currentTime);
       this.loaded.emit();
     });
   }

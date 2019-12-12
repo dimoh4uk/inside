@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
-import {tns} from 'tiny-slider/src/tiny-slider';
-import {Device, MediaQueryService, screenSizes} from '../../../core/services/media-query.service';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { tns } from 'tiny-slider/src/tiny-slider';
+import { Device, MediaQueryService, screenSizes } from '../../../core/services/media-query.service';
 
 let count = 0;
 
@@ -13,6 +13,8 @@ let count = 0;
 })
 export class VideoSliderComponent implements OnInit, AfterViewInit {
   @Input() public videoList = [];
+  @Output() public loaded = new EventEmitter();
+  protected loadItemCount = 0;
   public id = 'project-slider' + count;
   public isMobile = this.mediaQueryService.isPhone();
 
@@ -24,6 +26,13 @@ export class VideoSliderComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     console.log('tns=>', this.videoList.length, this.videoList);
+  }
+
+  loadOne() {
+    this.loadItemCount++;
+    if (this.loadItemCount === this.videoList.length) {
+      this.loaded.emit();
+    }
   }
 
   ngAfterViewInit() {
