@@ -13,9 +13,7 @@
   height: 100vh;
   transform: translate(-50%, -50%);
   filter: grayscale(1);
-  @include mobile() {
-    max-width: initial;
-  }
+  max-width: initial;
 }
 
 .header-content {
@@ -23,6 +21,9 @@
   z-index: 2;
   @include mobile() {
     margin-top: 20vh;
+  }
+  @include tablet() {
+    padding-bottom: rem-calc(60);
   }
 }
 
@@ -37,7 +38,6 @@
     align-items: end;
   }
 }
-
 
 .site-title {
   @include mobile() {
@@ -143,5 +143,12 @@ app-header-button {
 }
 
 .section {
+  position: relative;
   min-height: 100vh;
+
+  &.active {
+    .preview-block {
+      position: relative !important;
+    }
+  }
 }

@@ -1,3 +1,4 @@
 <div class="project-slider" [id]="id">
-  <app-video [playByHover]="true" class="app-video" [video]="video" *ngFor="let video of videoList"></app-video>
+  <app-video [playByHover]="!isMobile" class="app-video" [video]="video"
+             *ngFor="let video of videoList"></app-video>
 </div>

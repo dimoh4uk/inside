@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {tns} from 'tiny-slider/src/tiny-slider';
-import {Device, screenSizes} from '../../../core/services/media-query.service';
+import {Device, MediaQueryService, screenSizes} from '../../../core/services/media-query.service';
 
 let count = 0;
 
@@ -14,8 +14,11 @@ let count = 0;
 export class VideoSliderComponent implements OnInit, AfterViewInit {
   @Input() public videoList = [];
   public id = 'project-slider' + count;
+  public isMobile = this.mediaQueryService.isPhone();
 
-  constructor() {
+  constructor(
+    protected mediaQueryService: MediaQueryService,
+  ) {
     count++;
   }
 

@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "build-prod": "ng build --aot=true --lazyModules --optimization=true --prod=true --source-map",
+    "build-prod": "ng build --aot=true --lazyModules --optimization=true --prod=true",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

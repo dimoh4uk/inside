@@ -1,30 +1,11 @@
 import {AfterViewInit, Component, ElementRef, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {SiteSateService} from '../../../core/services/site-sate.service';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
 import {HeaderButtonComponent} from '../../../ui/components/header-button/header-button.component';
 import {ProjectInterface, ProjectsService} from '../../services/pojects/projects.service';
-import {HttpResponse} from '@angular/common/http';
 import {MediaQueryService} from '../../../core/services/media-query.service';
-import {fadeIn, fadeOut} from '../../../core/animation';
-
-enum TriggerName {
-  pageTitle = 'pageTitleTrigger',
-  pageTitleHidden = 'pageTitleHidden',
-  backEnabled = 'backEnabledTrigger',
-  previewSection = 'previewSection',
-}
-
-enum StateName {
-  stop = 'stop',
-  start = 'start',
-  show = 'show',
-  hide = 'hide',
-  active = 'active',
-  disabled = 'disabled',
-  mobileActive = 'mobileActive',
-  mobileDisabled = 'mobileDisabled',
-}
+import {fadeIn} from '../../../core/animation';
 
 @Component({
   selector: 'app-index',
@@ -32,65 +13,64 @@ enum StateName {
   styleUrls: ['./index.component.scss'],
   animations: [
     fadeIn,
-    trigger(TriggerName.pageTitle, [
-      state(StateName.stop, style({
+    trigger('pageTitleTrigger', [
+      state('stop', style({
         paddingLeft: '0px',
       })),
-      state(StateName.start, style({
+      state('start', style({
         paddingLeft: '92px',
       })),
-      transition(`${StateName.stop}<=>${StateName.start}`, [
+      transition(`stop <=> start`, [
         animate('0.7s ease')
       ]),
     ]),
-    trigger(TriggerName.pageTitleHidden, [
-      state(StateName.hide, style({
+    trigger('pageTitleHidden', [
+      state('hide', style({
         left: '0',
       })),
-      state(StateName.show, style({
+      state('show', style({
         left: '100%',
       })),
-      transition(`${StateName.show}<=>${StateName.hide}`, [
+      transition(`show <=> hide`, [
         animate('500ms ease')
       ]),
     ]),
-    trigger(TriggerName.backEnabled, [
-      state(StateName.active, style({
+    trigger('backEnabledTrigger', [
+      state('active', style({
         paddingRight: '100px',
       })),
-      state(StateName.disabled, style({
+      state('', style({
         paddingRight: 0,
       })),
-      state(StateName.mobileActive, style({
+      state('mobileActive', style({
         bottom: '0',
         left: '0',
       })),
-      state(StateName.mobileDisabled, style({
+      state('mobileDisabled', style({
         bottom: '-50px',
         left: '-50px',
       })),
-      transition(`${StateName.active}<=>${StateName.disabled}`, [
+      transition(`active <=> disabled`, [
         animate('0.7s ease')
       ]),
-      transition(`${StateName.mobileActive}<=>${StateName.mobileDisabled}`, [
+      transition(`mobileActive <=> mobileDisabled`, [
         animate('0.7s ease')
       ]),
     ]),
-    trigger(TriggerName.previewSection, [
-      state(StateName.show, style({
+    trigger('previewSection', [
+      state('show', style({
         position: 'absolute',
         left: '0',
         top: '-90px',
         right: '0',
       })),
-      state(StateName.hide, style({
+      state('hide', style({
         position: '*',
-        left: '*',
-        right: '*',
+        left: '0',
+        right: '0',
         top: '0',
-        marginTop: '0'
       })),
-      transition(`${StateName.hide} <=> ${StateName.show}`, [
+      transition(`hide <=> show`, [
         animate('1s ease')
       ]),
     ])
@@ -109,7 +89,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
   protected projectsLoaded: boolean;
   protected currentSection = null;
 
-
   constructor(
     protected router: Router,
     protected siteSateService: SiteSateService,
@@ -127,21 +106,24 @@ export class IndexComponent implements OnInit, AfterViewInit {
       // fullpage callbacks
       afterResize: () => {
         console.log('After resize');
+
       },
       onLeave: (origin, destination) => {
+        const section = this.getSectionId(destination.item);
+        if (section === 0) {
+          this.videoElement.play();
+        }
         this.currentSection = null;
       },
       afterLoad: (origin, destination) => {
-        setTimeout(() => {
-          console.log('afterLoad');
-          // tslint:disable-next-line:radix
-          this.currentSection = parseInt(destination.item.dataset.sectionId) || 0;
-          if (this.currentSection === 0) {
-            this.videoElement.play();
-          }
-        }, 300);
+        this.currentSection = this.getSectionId(destination.item);
       }
     };
+  }
+
+  getSectionId(section): number {
+    // tslint:disable-next-line:radix
+    return parseInt(section.dataset.sectionId) || 0;
   }
 
   getRef(fullPageRef) {
@@ -156,7 +138,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.headerButton.nativeElement.focus();
   }
-
 
   public mute(): void {
     this.videoElement.muted = !this.videoElement.muted;
@@ -188,7 +169,10 @@ export class IndexComponent implements OnInit, AfterViewInit {
         const resp = response.body;
         resp.forEach((project) => {
           project.videos.forEach((video) => {
-            video.muted = false;
+            video.muted = true;
+            if (!this.mediaQueryService.isPhone()) {
+              video.autoplay = true;
+            }
             return video;
           });
         });
@@ -199,7 +183,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
           this.fullpageApi.build();
           this.projectsLoaded = true;
-        }, 0);
+        }, 2000);
       });
   }
 
@@ -211,35 +195,36 @@ export class IndexComponent implements OnInit, AfterViewInit {
     return this.siteSateService.headerAnimationStart;
   }
 
-  public getTriggerStatus(triggerName: any): StateName {
-    if (TriggerName.backEnabled === triggerName) {
+  public getTriggerStatus(triggerName: any): string {
+    if ('backEnabledTrigger' === triggerName) {
       if (!this.mediaQueryService.isPhone()) {
-        return this.headerAnimationStart ? StateName.active : StateName.disabled;
+        return this.headerAnimationStart ? 'active' : 'disabled';
       } else {
-        return this.headerAnimationStart ? StateName.mobileActive : StateName.mobileDisabled;
+        return this.headerAnimationStart ? 'mobileActive' : 'mobileDisabled';
       }
     }
 
-    if (!this.mediaQueryService.isPhone() && (TriggerName.pageTitle === triggerName)) {
-      return this.headerAnimationStart ? StateName.start : StateName.stop;
+    if (!this.mediaQueryService.isPhone() && ('pageTitleTrigger' === triggerName)) {
+      return this.headerAnimationStart ? 'start' : 'stop';
     }
 
-    if (this.mediaQueryService.isPhone() && (TriggerName.pageTitleHidden === triggerName)) {
-      return this.headerAnimationStart ? StateName.show : StateName.hide;
+    if (this.mediaQueryService.isPhone() && ('pageTitleHidden' === triggerName)) {
+      return this.headerAnimationStart ? 'show' : 'hide';
     }
   }
 
   public getPreviewTriggerStatus(section) {
     const isInitial = this.currentSection === null;
     if (!this.headerAnimationStart || !this.projectsLoaded || isInitial) {
-      return StateName.hide;
+      return 'hide';
     }
 
     // tslint:disable-next-line:radix
     const sectionId = parseInt(section.dataset.sectionId);
     const nextSection = this.currentSection + 1;
     const currentIsNext = sectionId === nextSection;
-    return currentIsNext ? StateName.show : StateName.hide;
+
+    return currentIsNext ? 'show' : 'hide';
   }
 
   public back(): void {

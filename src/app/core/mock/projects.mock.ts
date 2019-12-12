@@ -14,12 +14,12 @@ export const projectsMock: Array<ProjectInterface> = [
       },
       {
         id: 264385188,
-        currentTime: 10,
+        currentTime: 15,
         quality: '240p',
       },
       {
         id: 264385188,
-        currentTime: 15,
+        currentTime: 25,
         quality: '240p',
       },
     ]
@@ -36,12 +36,12 @@ export const projectsMock: Array<ProjectInterface> = [
       },
       {
         id: 240723331,
-        currentTime: 10,
+        currentTime: 15,
         quality: '240p',
       },
       {
         id: 240723331,
-        currentTime: 15,
+        currentTime: 25,
         quality: '240p',
       },
     ]

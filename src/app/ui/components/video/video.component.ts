@@ -9,7 +9,8 @@ import {
   Output,
 } from '@angular/core';
 import Player from '@vimeo/player';
-import { Options } from 'vimeo__player';
+import {Options} from 'vimeo__player';
+import {MediaQueryService} from '../../../core/services/media-query.service';
 
 const defaultVideoConfig = {
   controls: false,
@@ -47,14 +48,23 @@ export class VideoComponent implements OnInit {
   protected hostSelector = this.elRef.nativeElement;
   public player: Player;
 
-  constructor(protected elRef: ElementRef) {
+  constructor(
+    protected elRef: ElementRef,
+    protected mediaQueryService: MediaQueryService,
+  ) {
+  }
+
+  isMobile() {
+    return this.mediaQueryService.isPhone();
   }
 
   ngOnInit() {
+
     this.createConfig();
     this.player = new Player(this.hostSelector, this.config);
     this.player.setCurrentTime(this.config.currentTime);
-    this.player.on('loaded', async () => {
+
+    this.player.on('loaded', () => {
       this.loaded.emit();
     });
   }
@@ -108,7 +118,7 @@ export class VideoComponent implements OnInit {
 
   public createConfig() {
     const config = {...defaultVideoConfig, ...this.video} as VideoInterface;
-    config.url = this.createUrl(config);
+    // config.url = this.createUrl(config);
     this.config = config;
   }
 

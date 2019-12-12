@@ -1,14 +1,7 @@
-import { Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { SiteSateService } from '../../../core/services/site-sate.service';
-import { MediaQueryService } from '../../../core/services/media-query.service';
-
-enum TriggerName {
-  circle = 'circleTrigger',
-  arrow = 'arrowTrigger',
-  arrowPhone = 'arrowTriggerPhone',
-  title = 'titleTrigger',
-}
+import {Component, HostBinding, HostListener, Input, OnInit} from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {SiteSateService} from '../../../core/services/site-sate.service';
+import {MediaQueryService} from '../../../core/services/media-query.service';
 
 enum StateName {
   stop = 'hidden',
@@ -20,53 +13,53 @@ enum StateName {
   templateUrl: './header-button.component.html',
   styleUrls: ['./header-button.component.scss'],
   animations: [
-    trigger(TriggerName.circle, [
-      state(StateName.stop, style({
+    trigger('circleTrigger', [
+      state('hidden', style({
         height: 0,
         width: 0,
         opacity: 0,
       })),
-      state(StateName.start, style({
+      state('show', style({
         height: '88px',
         width: '88px',
         opacity: 1,
       })),
-      transition(`${StateName.stop}<=>${StateName.start}`, [
+      transition('hidden <=> show', [
         animate('0.2s ease'),
       ]),
     ]),
-    trigger(TriggerName.arrow, [
-      state(StateName.stop, style({
+    trigger('arrowTrigger', [
+      state('hidden', style({
         width: '*',
         paddingLeft: '0px',
       })),
-      state(StateName.start, style({
+      state('show', style({
         width: '100%',
         paddingLeft: '92px',
       })),
-      transition(`${StateName.stop}<=>${StateName.start}`, [
+      transition('hidden <=> show', [
         animate('0.7s')
       ]),
     ]),
-    trigger(TriggerName.arrowPhone, [
-      state(StateName.stop, style({
+    trigger('arrowTriggerPhone', [
+      state('hidden', style({
         left: '*',
       })),
-      state(StateName.start, style({
+      state('show', style({
         left: '50%',
       })),
-      transition(`${StateName.stop}<=>${StateName.start}`, [
+      transition('hidden <=> show', [
         animate('0.7s')
       ]),
     ]),
-    trigger(TriggerName.title, [
-      state(StateName.stop, style({
+    trigger('titleTrigger', [
+      state('hidden', style({
         width: '*',
       })),
-      state(StateName.start, style({
+      state('show', style({
         width: '100%',
       })),
-      transition(`${StateName.stop}<=>${StateName.start}`, [
+      transition('hidden <=> show', [
         animate('0.7s')
       ]),
     ]),
@@ -92,6 +85,6 @@ export class HeaderButtonComponent implements OnInit {
   }
 
   getAnimationState() {
-    return this.siteSateService.headerAnimationStart ? StateName.start : StateName.stop;
+    return this.siteSateService.headerAnimationStart ? 'show' : 'hidden';
   }
 }
