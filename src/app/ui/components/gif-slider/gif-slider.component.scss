@@ -1,0 +1,18 @@
+@import '~tiny-slider/src/tiny-slider.scss';
+@import "~src/styles/variables";
+@import "~src/styles/helpers/all";
+
+:host {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+//.wrapper {
+//  position: relative;
+//  height: rem-calc(180);
+//
+//  @include mobile() {
+//    height: initial;
+//  }
+//}

@@ -1,0 +1,5 @@
+<div class="project-slider" [id]="id">
+ <div class="gif" *ngFor="let gif of gitList">
+   <img [src]="'assets/gif/'+gif.url" (load)="loadOne()">
+ </div>
+</div>

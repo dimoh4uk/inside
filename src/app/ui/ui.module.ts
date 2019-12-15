@@ -5,6 +5,7 @@ import {HeaderButtonComponent} from './components/header-button/header-button.co
 import {VideoComponent} from './components/video/video.component';
 import {VideoSliderComponent} from './components/video-slider/video-slider.component';
 import {VideoStaticComponent} from './components/video-static/video-static.component';
+import { GifSliderComponent } from './components/gif-slider/gif-slider.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {VideoStaticComponent} from './components/video-static/video-static.compo
     VideoComponent,
     VideoSliderComponent,
     VideoStaticComponent,
+    GifSliderComponent,
   ],
   exports: [
     SiteSectionComponent,
@@ -22,6 +24,7 @@ import {VideoStaticComponent} from './components/video-static/video-static.compo
     VideoSliderComponent,
     SharedModule,
     VideoStaticComponent,
+    GifSliderComponent,
   ],
   imports: [
     SharedModule
