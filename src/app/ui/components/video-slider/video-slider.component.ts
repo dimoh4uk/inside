@@ -25,7 +25,7 @@ export class VideoSliderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log('tns=>', this.videoList.length, this.videoList);
+
   }
 
   loadOne() {

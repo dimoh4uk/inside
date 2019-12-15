@@ -171,9 +171,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         resp.forEach((project) => {
           project.videos.forEach((video) => {
             video.muted = true;
-            if (!this.mediaQueryService.isPhone()) {
-              video.autoplay = true;
-            }
+            video.autoplay = true;
             return video;
           });
         });
