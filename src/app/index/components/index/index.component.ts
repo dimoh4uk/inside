@@ -210,6 +210,9 @@ export class IndexComponent implements OnInit, AfterViewInit {
   }
 
   public getPreviewTriggerStatus(section) {
+    if (this.mediaQueryService.isPhone()) {
+      return 'hide';
+    }
     const isInitial = this.currentSection === null;
     if (!this.headerAnimationStart || !this.projectsLoaded || isInitial) {
       return 'hide';

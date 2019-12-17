@@ -152,3 +152,9 @@ app-header-button {
     }
   }
 }
+
+.project-section {
+  //@include mobile() {
+  //  padding-top: rem-calc(60);
+  //}
+}

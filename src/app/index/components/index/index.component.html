@@ -1,8 +1,6 @@
 <div fullpage id="fullpage" [options]="fullPageConfig" (ref)="getRef($event)">
   <div class="section"
        [attr.data-section-id]="0"
-       #sectionFirst
-       [@previewSection]="getPreviewTriggerStatus(sectionFirst)"
   >
     <header class="site-header">
       <video
@@ -42,7 +40,7 @@
     </header>
   </div>
   <ng-container *ngIf="projects && projects.length">
-    <div class="section fp-auto-height-responsive"
+    <div class="section fp-auto-height project-section"
          *ngFor="let project of projects; let i = index"
          [attr.data-section-id]="i+1" #section>
       <div class="container preview-block" [@previewSection]="getPreviewTriggerStatus(section)">
