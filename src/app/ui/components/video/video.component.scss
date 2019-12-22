@@ -1,14 +1,30 @@
 :host {
   display: block;
   overflow: hidden;
-  position: relative;
 }
 
-.layer {
+.wrapper {
+  position: relative;
+  padding-top: 62.3%;
+}
+
+.preview, .video-container {
   position: absolute;
   top: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
   left: 0;
+}
+
+.preview {
+  z-index: 2;
+
+  img {
+    display: block;
+    margin: auto;
+  }
+}
+
+.video-container {
   z-index: 1;
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostBinding, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SiteSateService } from '../../../core/services/site-sate.service';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
@@ -6,6 +6,13 @@ import { HeaderButtonComponent } from '../../../ui/components/header-button/head
 import { ProjectInterface, ProjectsService } from '../../services/pojects/projects.service';
 import { MediaQueryService } from '../../../core/services/media-query.service';
 import { fadeIn } from '../../../core/animation';
+import { PageLoadersServiceService } from '../../../core/services/page-loaders-service.service';
+
+const showRellVideo = {
+  id: 240723331,
+  quality: '1080p',
+  controls: true,
+};
 
 @Component({
   selector: 'app-index',
@@ -76,7 +83,7 @@ import { fadeIn } from '../../../core/animation';
     ])
   ]
 })
-export class IndexComponent implements OnInit, AfterViewInit {
+export class IndexComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('@fadeIn') public fadeIn;
   @ViewChild('bgVideo', {static: true}) video: ElementRef;
   @ViewChild(HeaderButtonComponent, {static: false, read: ElementRef}) headerButton: ElementRef;
@@ -85,6 +92,9 @@ export class IndexComponent implements OnInit, AfterViewInit {
   public pageTitle = 'YYYY 2018';
   public fullPageConfig: any;
   public fullpageApi: any;
+  public modalOpened = false;
+
+  public showrellVideo = {...showRellVideo};
 
   protected loadedSliders = 0;
   protected projectsLoaded: boolean;
@@ -95,6 +105,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     protected siteSateService: SiteSateService,
     protected projectsService: ProjectsService,
     protected mediaQueryService: MediaQueryService,
+    protected pageLoadersServiceService: PageLoadersServiceService,
   ) {
 
     this.fullPageConfig = {
@@ -107,7 +118,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
       // fullpage callbacks
       afterResize: () => {
         console.log('After resize');
-
       },
       onLeave: (origin, destination) => {
         const section = this.getSectionId(destination.item);
@@ -122,6 +132,10 @@ export class IndexComponent implements OnInit, AfterViewInit {
     };
   }
 
+  ngOnDestroy(): void {
+    this.back();
+  }
+
   getSectionId(section): number {
     // tslint:disable-next-line:radix
     return parseInt(section.dataset.sectionId) || 0;
@@ -134,6 +148,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.toggleVideoStatus();
     this.mute();
+    this.pageLoadersServiceService.hideMainLoader();
   }
 
   ngAfterViewInit() {
@@ -156,6 +171,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     if (!this.siteSateService.headerAnimationStart) {
       this.siteSateService.startHeaderAnimation();
     } else {
+      this.toggleModalStatus();
       return;
     }
 
@@ -171,7 +187,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         resp.forEach((project) => {
           project.videos.forEach((video) => {
             video.muted = true;
-            video.autoplay = true;
+            // video.autoplay = true;
             return video;
           });
         });
@@ -246,5 +262,18 @@ export class IndexComponent implements OnInit, AfterViewInit {
     if (this.projects && (this.loadedSliders === this.projects.length)) {
       this.projectsLoaded = true;
     }
+  }
+
+  public toggleModalStatus() {
+    console.log('asd->');
+    this.modalOpened = !this.modalOpened;
+  }
+
+  public openModal(): void {
+    this.modalOpened = true;
+  }
+
+  public closeModal(): void {
+    this.modalOpened = false;
   }
 }

@@ -6,10 +6,79 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .fullPageLoader {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: #000;
+      z-index: 2;
+      display: none;
+    }
+
+    .fullPageLoader.show {
+      display: block;
+    }
+
+    .spinner {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      animation: breath 3000ms ease-in-out infinite;
+    }
+
+    .spinner::before {
+      content: '';
+      position: absolute;
+      width: 10vh;
+      height: 10vh;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border: 5px solid #474747;
+      border-bottom-color: white;
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 700ms cubic-bezier(.31, .26, 0, .39) infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: translate(-50%, -50%) rotate(0);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    @keyframes breath {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.2;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 <body>
+<div class="fullPageLoader show">
+  <div class="spinner"></div>
+</div>
 <app-root>
-  ...loading
 </app-root>
 </body>
 </html>

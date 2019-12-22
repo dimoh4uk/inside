@@ -4,6 +4,7 @@ import { SiteSateService } from '../core/services/site-sate.service';
 import { AppRoutersPath } from '../app-routers.path';
 import { fadeIn } from '../core/animation';
 import { Options } from '@vimeo/player';
+import { PageLoadersServiceService } from '../core/services/page-loaders-service.service';
 
 @Component({
   selector: 'app-preloader',
@@ -25,22 +26,24 @@ export class PreloaderComponent implements OnInit {
   constructor(
     protected router: Router,
     protected siteSateService: SiteSateService,
+    protected pageLoadersServiceService: PageLoadersServiceService,
   ) {
+    this.pageLoadersServiceService.showMainLoader();
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.siteSateService.load = true;
-      this.navigateToIndex();
-    }, 2000);
-
   }
+
 
   navigateToIndex() {
     this.router.navigate(['/' + AppRoutersPath.index]);
   }
 
   loaded() {
-    console.log('sdasdasd');
+    this.pageLoadersServiceService.hideMainLoader();
+    setTimeout(() => {
+      this.siteSateService.load = true;
+      this.navigateToIndex();
+    }, 2000);
   }
 }

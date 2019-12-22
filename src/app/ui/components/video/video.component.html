@@ -1,1 +1,6 @@
-<div class="layer"></div>
+<div class="wrapper">
+  <div class="preview" *ngIf="showPreview && video.preview">
+    <img (load)="emitLoaded()" [src]="'assets/video-preview/'+video.preview" alt="video-preview">
+  </div>
+  <div class="video-container" #videoContainer></div>
+</div>

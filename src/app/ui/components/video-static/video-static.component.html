@@ -1,6 +1,7 @@
 <video
-    #videoLink
-    loop
+  #videoLink
+  loop
+  (loadeddata)="loaded.emit()"
 >
   <source [attr.src]="video.url" type="video/mp4">
 </video>

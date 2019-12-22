@@ -16,6 +16,7 @@ export interface VideoInterface {
 export class VideoStaticComponent implements OnInit {
   @Input() public video: VideoInterface;
   @ViewChild('videoLink', {static: true}) videoLink: ElementRef;
+  @Output() public loaded: EventEmitter<void> = new EventEmitter<void>();
 
   protected videoElement;
 
@@ -24,7 +25,6 @@ export class VideoStaticComponent implements OnInit {
 
   ngOnInit() {
     this.videoElement = this.videoLink.nativeElement;
-
     this.initMute();
     setTimeout(() => this.initAutoPlay(), 0);
   }

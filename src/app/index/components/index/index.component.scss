@@ -153,8 +153,19 @@ app-header-button {
   }
 }
 
-.project-section {
-  //@include mobile() {
-  //  padding-top: rem-calc(60);
-  //}
+.modal-close {
+  @include mobile() {
+    left: 0;
+    bottom: 0;
+    top: initial;
+    width: 0;
+    height: 0;
+    border-bottom: 50px solid white;
+    border-right: 50px solid transparent;
+    border-radius: initial;
+    padding: 0;
+    &:before, &:after {
+      display: none;
+    }
+  }
 }
