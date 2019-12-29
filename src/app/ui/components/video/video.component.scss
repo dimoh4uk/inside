@@ -1,3 +1,6 @@
+@import "~src/styles/variables";
+@import "~src/styles/helpers/all";
+
 :host {
   display: block;
   overflow: hidden;
@@ -6,6 +9,9 @@
 .wrapper {
   position: relative;
   padding-top: 62.3%;
+  @include mobile() {
+    padding-top: 40%;
+  }
 }
 
 .preview, .video-container {
@@ -18,10 +24,9 @@
 
 .preview {
   z-index: 2;
-
   img {
     display: block;
-    margin: auto;
+    margin: 0 auto;
   }
 }
 

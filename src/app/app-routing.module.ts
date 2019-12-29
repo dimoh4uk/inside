@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./errors/errors.module').then(m => m.ErrorsModule)
   },
   {
+    path: AppRoutersPath.showreel,
+    loadChildren: () => import('./show-reel/show-reel.module').then(m => m.ShowReelModule)
+  },
+  {
     path: '**',
     redirectTo: AppRoutersPath.errors,
   },

@@ -69,7 +69,6 @@ app-header-button {
   margin-top: rem-calc(90);
   @include mobile() {
     display: block;
-    padding-top: 4vh;
   }
 }
 
@@ -152,6 +151,7 @@ app-header-button {
     }
   }
 }
+
 
 .modal-close {
   @include mobile() {

@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: IndexComponent,
-    // canActivate: [LoadedGuard],
+    canActivate: [LoadedGuard],
     data: {
       animation: AppRoutersPath.index,
     }

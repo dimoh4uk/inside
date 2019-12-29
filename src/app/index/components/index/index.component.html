@@ -7,7 +7,7 @@
         #bgVideo
         loop
         class="video-bg">
-        <source src="assets/video/show_reel.mp4" type="video/mp4">
+        <source src="assets/video/Aerial.mov" type="video/mp4">
       </video>
       <div class="header-content container">
         <button
@@ -68,11 +68,4 @@
       </div>
     </div>
   </ng-container>
-</div>
-<div class="modal" [ngClass]="{'is-active' : modalOpened}">
-  <div class="modal-background" (click)="closeModal()"></div>
-  <div class="modal-content">
-        <app-video [video]="showrellVideo"></app-video>
-  </div>
-  <button class="modal-close is-large" aria-label="close" (click)="closeModal()"></button>
 </div>

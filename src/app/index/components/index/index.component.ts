@@ -7,11 +7,14 @@ import { ProjectInterface, ProjectsService } from '../../services/pojects/projec
 import { MediaQueryService } from '../../../core/services/media-query.service';
 import { fadeIn } from '../../../core/animation';
 import { PageLoadersServiceService } from '../../../core/services/page-loaders-service.service';
+import { VideoComponent } from '../../../ui/components/video/video.component';
+import { AppRoutersPath } from '../../../app-routers.path';
 
 const showRellVideo = {
-  id: 240723331,
+  id: 318408076,
   quality: '1080p',
   controls: true,
+  muted: false,
 };
 
 @Component({
@@ -87,12 +90,12 @@ export class IndexComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('@fadeIn') public fadeIn;
   @ViewChild('bgVideo', {static: true}) video: ElementRef;
   @ViewChild(HeaderButtonComponent, {static: false, read: ElementRef}) headerButton: ElementRef;
+  @ViewChild('videoComponent', {static: false, read: VideoComponent}) videoComponent: VideoComponent;
 
   public projects: Array<ProjectInterface>;
   public pageTitle = 'YYYY 2018';
   public fullPageConfig: any;
   public fullpageApi: any;
-  public modalOpened = false;
 
   public showrellVideo = {...showRellVideo};
 
@@ -171,7 +174,7 @@ export class IndexComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.siteSateService.headerAnimationStart) {
       this.siteSateService.startHeaderAnimation();
     } else {
-      this.toggleModalStatus();
+      this.openVideoPage();
       return;
     }
 
@@ -264,16 +267,8 @@ export class IndexComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  public toggleModalStatus() {
-    console.log('asd->');
-    this.modalOpened = !this.modalOpened;
-  }
 
-  public openModal(): void {
-    this.modalOpened = true;
-  }
-
-  public closeModal(): void {
-    this.modalOpened = false;
+  public openVideoPage() {
+    window.open('/' + AppRoutersPath.showreel, '_blank');
   }
 }

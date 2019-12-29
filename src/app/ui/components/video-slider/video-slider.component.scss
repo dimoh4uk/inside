@@ -8,10 +8,20 @@
   white-space: nowrap;
 }
 
+.app-video {
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+  }
+}
+
 .wrapper {
   position: relative;
-  height: rem-calc(180);
-
   @include mobile() {
     height: initial;
   }

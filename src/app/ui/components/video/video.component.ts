@@ -44,9 +44,11 @@ export class VideoComponent implements OnInit {
   @Input() public playByHover = false;
   @ViewChild('videoContainer', {static: true}) videoContainer: ElementRef;
 
-  protected showPreview = true;
+
+  protected emited = false;
   protected config: VideoInterface;
   public player: Player;
+  public showPreview = true;
 
   constructor(
     protected mediaQueryService: MediaQueryService,
@@ -60,7 +62,7 @@ export class VideoComponent implements OnInit {
   ngOnInit() {
     this.createConfig();
     if (!this.config.preview) {
-      this.emitLoaded();
+      // this.emitLoaded();
     }
     this.player = new Player(this.videoContainer.nativeElement, this.config);
     this.player.ready()
@@ -79,7 +81,11 @@ export class VideoComponent implements OnInit {
     return this.player.play();
   }
 
-  protected emitLoaded(): void {
+  public emitLoaded(): void {
+    if (this.emited) {
+      return;
+    }
+    this.emited = true;
     this.loaded.emit();
   }
 
