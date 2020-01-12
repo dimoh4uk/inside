@@ -22,7 +22,7 @@ const routes: Routes = [
     loadChildren: () => import('./errors/errors.module').then(m => m.ErrorsModule)
   },
   {
-    path: AppRoutersPath.showreel,
+    path: AppRoutersPath.showVideo,
     loadChildren: () => import('./show-reel/show-reel.module').then(m => m.ShowReelModule)
   },
   {

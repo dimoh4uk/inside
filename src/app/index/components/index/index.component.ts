@@ -269,6 +269,7 @@ export class IndexComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   public openVideoPage() {
-    window.open('/' + AppRoutersPath.showreel, '_blank');
+    const url = `/${AppRoutersPath.showVideo}?id=318408076`;
+    window.open(url, '_blank');
   }
 }

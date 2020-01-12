@@ -11,6 +11,7 @@ import {
 import Player from '@vimeo/player';
 import { Options } from 'vimeo__player';
 import { MediaQueryService } from '../../../core/services/media-query.service';
+import { AppRoutersPath } from '../../../app-routers.path';
 
 const defaultVideoConfig = {
   controls: false,
@@ -97,5 +98,11 @@ export class VideoComponent implements OnInit {
     const config = {...defaultVideoConfig, ...this.video} as VideoInterface;
     // config.url = this.createUrl(config);
     this.config = config;
+  }
+
+  @HostListener('click')
+  public open() {
+    const url = `/${AppRoutersPath.showVideo}?id=${this.video.id}`;
+    window.open(url, '_blank');
   }
 }

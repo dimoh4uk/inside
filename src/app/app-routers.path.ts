@@ -2,5 +2,6 @@ export enum AppRoutersPath {
   index = 'index',
   preloader = 'preloader',
   errors = 'errors',
-  showreel = 'showreel'
+  showreel = 'showreel',
+  showVideo = 'showVideo'
 }
