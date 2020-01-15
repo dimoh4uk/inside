@@ -30,7 +30,7 @@ export const projectsMock: Array<ProjectInterface> = [
   {
     id: 2,
     name: 'Iceland / Another Planet',
-    location: 'Lofoten / Iceland',
+    location: 'Iceland',
     description: 'The rhythm of the city, its enormous buildings and avenues slowly but surely erase one simple thought from your mind - the best designer is nature.',
     videos: [
       {

@@ -9,7 +9,7 @@
   <div class="contact" [@fadeIn] *ngIf="showContacts">
     <ul class="social">
       <li *ngFor="let item of socialList">
-        <a [href]="item.link"><img [src]="'assets/img/'+item.icon" alt="icon"></a>
+        <a [href]="item.link" target="_blank"><img [src]="'assets/img/'+item.icon" alt="icon"></a>
       </li>
     </ul>
     <ul class="info">

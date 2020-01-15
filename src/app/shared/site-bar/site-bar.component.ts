@@ -7,23 +7,19 @@ import { MediaQueryService } from '../../core/services/media-query.service';
 
 const socialList = [
   {
-    link: '#',
+    link: 'https://www.instagram.com/inside_production/?hl=ru',
     icon: 'inst.png',
   },
   {
-    link: '#',
+    link: 'https://vimeo.com/insideproduction',
     icon: 'vi.png',
   },
   {
-    link: '#',
+    link: 'https://www.facebook.com/inside.videoproduction/',
     icon: 'face.png',
   },
   {
-    link: '#',
-    icon: 'behance.png',
-  },
-  {
-    link: '#',
+    link: 'https://vk.com/insidevideoproduction',
     icon: 'vk.png',
   },
 ];
