@@ -24,7 +24,7 @@
     "@types/vimeo__player": "^2.9.0",
     "@vimeo/player": "^2.10.0",
     "bulma": "^0.8.0",
-    "fullpage.js": "^3.0.7",
+    "fullpage.js": "^4.0.5",
     "install": "^0.13.0",
     "npm": "^6.13.6",
     "rxjs": "~6.5.4",
